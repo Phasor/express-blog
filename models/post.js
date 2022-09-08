@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Comment = require('./comment').schema;
 
 const Schema = mongoose.Schema;
 
@@ -7,7 +8,8 @@ const PostSchema = new Schema({
     content: { type: String, required: true },
     author: { type: Schema.Types.ObjectId, ref: 'User', required: true },
     date: { type: Date, default: Date.now },
-    published: { type: Boolean, required: true, default: false }
+    published: { type: Boolean, required: true, default: false },
+    comments: [Comment]
 });
 
 // Virtual for post's URL
