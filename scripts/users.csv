@@ -1,0 +1,3 @@
+email,password,admin
+a@test.com,test,FALSE
+b@test.com,test,TRUE

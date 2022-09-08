@@ -7,11 +7,14 @@
     <title>Sign Up</title>
 </head>
 <body>
-    <form action="/user" method="post">
-        <input type="text" name="email" placeholder="Email">
-        <input type="password" name="password" placeholder="Password">
+    
+    <form action="/user" method="post" encType="multipart/form-data">
+        <label for "file">Upload User List</label>
+        Click <a href="/template">here</a> for an example template.</p>
+        <input type="file" name="file" accept="*.csv" />
         <button>Submit</button>
     </form>
     <%= locals.error %>
+    <%= locals.message %>
 </body>
 </html>
