@@ -1,5 +1,5 @@
 
-// ** /post routes **
+// *** /POST routes *******************
 
 // get all posts
 GET http://localhost:3000/post
@@ -34,4 +34,39 @@ content-type: application/json
   "published": true
 }
 
-// ** /user routes **
+###
+// *** /USER routes *******************
+
+// get all users
+GET http://localhost:3000/user
+content-type: application/json
+
+###
+// create a new user
+POST http://localhost:3000/user
+content-type: application/json
+
+{
+  "email": "c@test.com",
+  "password": "test",
+  "admin": true
+}
+
+###
+// delete a user
+DELETE http://localhost:3000/user/631b472a56450886c13a1bff
+content-type: application/json
+
+###
+// update a user
+PUT http://localhost:3000/user/631b472a56450886c13a1bff
+content-type: application/json
+
+{
+  "email": "updated email",
+  "password": "000000",
+  "admin": false
+}
+
+
+   
