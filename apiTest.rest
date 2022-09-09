@@ -48,13 +48,12 @@ content-type: application/json
 
 {
   "email": "c@test.com",
-  "password": "test",
-  "admin": true
+  "password": "test"
 }
 
 ###
 // delete a user
-DELETE http://localhost:3000/user/631b472a56450886c13a1bff
+DELETE http://localhost:3000/user/631b5b7b9cef2e52ace6f963
 content-type: application/json
 
 ###
@@ -68,5 +67,39 @@ content-type: application/json
   "admin": false
 }
 
+###
+// *** /ADMIN routes *******************
+
+// get all admins
+GET http://localhost:3000/admin
+content-type: application/json
+
+###
+// create a new admin
+POST http://localhost:3000/admin
+content-type: application/json
+
+{
+  "email": "d@test.com",
+  "password": "test"
+}
+
+###
+// *** /COMMENT routes *******************
+
+// get all comments
+GET http://localhost:3000/comment
+content-type: application/json
+
+###
+// create a new comment
+POST http://localhost:3000/comment
+content-type: application/json
+
+{
+  "content": "test comment 3",
+  "author": "631b5b429cef2e52ace6f960",
+  "post": "631b37da709d1e95e569061e"
+}
 
    

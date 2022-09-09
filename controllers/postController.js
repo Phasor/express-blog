@@ -5,7 +5,7 @@ const { body,validationResult } = require('express-validator'); // post data san
 
 exports.post_get = (req, res, next) => {
     Post.find()
-    .sort([['date', 'descending']])
+    .sort([['date', 'ascending']])
     .populate('author')
     .exec((err, posts) => {
         if (err) { 
