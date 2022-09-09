@@ -1,0 +1,37 @@
+
+// ** /post routes **
+
+// get all posts
+GET http://localhost:3000/post
+content-type: application/json
+
+###
+// create a new post
+POST http://localhost:3000/post
+content-type: application/json
+
+{
+  "title": "Soap Title",
+  "content": "Soap Content",
+  "author": "63182524e0a8631983873a22"
+}
+
+###
+// delete a post
+DELETE http://localhost:3000/post/631b3947709d1e95e5690628
+content-type: application/json
+
+###
+// update a post
+PUT http://localhost:3000/post/631b37da709d1e95e569061e
+content-type: application/json
+
+{
+  "title": "Yoob Title2 UPDATED",
+  "content": "Yoob content2",
+  "author": "63182524e0a8631983873a22",
+  "date": "2021-09-09T12:55:54.147+00:00",
+  "published": true
+}
+
+// ** /user routes **
