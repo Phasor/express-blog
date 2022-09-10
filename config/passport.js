@@ -19,6 +19,7 @@ const strategy = new JwtStrategy(options, (payload, done) => {
     // // req payload contains "sub" property which is the id of the user in the db
     User.findOne({ _id: payload.sub })
         .then(user => {
+            console.log('user', user);
             // if we reach here our jwt is valid, now just check we have a  user from the db
             if (user) {
                 return done(null, user); // no error, but there is a user
