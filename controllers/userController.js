@@ -1,6 +1,6 @@
 const User = require('../models/user');
-const mongoose = require('mongoose');
 const {body, validationResult} = require('express-validator');
+const bcrypt = require('bcryptjs'); // hash passwords
 
 exports.user_get = (req, res, next) => {
     User.find()
@@ -23,7 +23,7 @@ exports.user_getById = (req, res, next) => {
 
 
 exports.user_create_post = [
-    body('email', 'Email must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('username', 'Email must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('password', 'Password must not be empty.').trim().isLength({ min: 1 }).escape(),
     
     // Process request after validation and sanitization.
@@ -38,17 +38,31 @@ exports.user_create_post = [
         else {
             // Data from form is valid.
             // Create an User object with escaped and trimmed data.
-            var user = new User(
-                {
-                    email: req.body.email,
-                    password: req.body.password,
-                    admin: false 
+
+
+            bcrypt.hash(req.body.password, 10, (error, hashedPassword) => {
+                // if err, reload page with error message
+                if (error) {
+                    console.log(error);
+                    res.status(400).json({ error: error });
+                }
+
+                const user = new User(
+                    {
+                        username: req.body.username,
+                        password: hashedPassword,
+                        admin: false 
+                    }
+                );
+                
+                user.save(function (err) {
+                    if (err) { 
+                        return res.json(err); 
+                    }
+                    // Successful 
+                    res.json({message: "New user created", user: user});
                 });
-            user.save(function (err) {
-                if (err) { return res.json(err); }
-                // Successful 
-                res.json({message: "New user created", user: user});
-            });
+            })
         }
     }
 ]
@@ -64,7 +78,7 @@ exports.user_delete = (req, res, next) => {
 
 exports.user_update = [
     // assume all fields are passed in. Will pull in old User that can be edited in WYSIWYG editor
-    body('email', 'Email must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('username', 'Email must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('password', 'Password must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('admin', 'Admin must not be empty.').trim().isLength({ min: 1 }).escape(),
 
@@ -81,7 +95,7 @@ exports.user_update = [
             // Data from form is valid.
            User.findByIdAndUpdate(req.params.id, 
             {
-                email: req.body.email,
+                username: req.body.username,
                 password: req.body.password,
                 admin: req.body.admin
             },

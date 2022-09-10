@@ -47,7 +47,7 @@ POST http://localhost:3000/user
 content-type: application/json
 
 {
-  "email": "c@test.com",
+  "username": "a@test.com",
   "password": "test"
 }
 
@@ -62,7 +62,7 @@ PUT http://localhost:3000/user/631b472a56450886c13a1bff
 content-type: application/json
 
 {
-  "email": "updated email",
+  "username": "updated email",
   "password": "000000",
   "admin": false
 }
@@ -80,16 +80,17 @@ POST http://localhost:3000/admin
 content-type: application/json
 
 {
-  "email": "d@test.com",
+  "username": "d@test.com",
   "password": "test"
 }
 
 ###
 // *** /COMMENT routes *******************
 
-// get all comments
+// get all comments - protected route
 GET http://localhost:3000/comment
 content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzFjZWEzYzhhZjE1MWE4ZjgyODdiMzEiLCJpYXQiOjE2NjI4Mzk2ODIzNDgsImV4cCI6MTY2MjgzOTc2ODc0OH0.nPmn4rVnnunlidIHjNdEBhOahjEWIsix6_2Q40oZERocIT6TBVxTYhcW4MbqKW08cn8wanR3RWL_E5zQd1Jf2Hz6_cj4MEZ0lQc7hAInfK2qFBzzLHaYbI80Zgpw5N2uIVGDTn5bnR3Idpje1GXkHBGzJTbRCBxXuYiS9QphLKhaxByXkeTROQwe4muCwljpymOIb8at_uzpiTVuZQQvZx2e2KTjBYcJvWIJv77Ru7dliBdLpys-wBk4keSZuUUE-ZKV8AQPs-misfMjGyJyEximBjr_-NQi21Sf_rcBh79YhNZtBPbwAFs2jmXbROlkCxWLQQF4-qSymGS-m1VUUdbhCir8jLwLVlYSGlkNdg0gCWEKt7t45M6D2nwj0ITMhqLcrVTMjfhbQ5b2TQ2iIHHx8IPOtekhgY1mC7IQQflvzZiW-Gs6YXlVsxex6GXNZin8A9PJg4Xitwtxp_YZzVNafwYoNpYF7pUHzEIkrMl1LW-hexwlcuqNdvEWUJy3OIcyQRugfJpTmXphjx4oAuSaFNEB9FlvKmphLsGo217Xw3drt-jIJcdE2reXkEysOiP2diqLgJug1v8AqkKQvq00TPxfmnjobE9i1ZP-uscPkiWxzhRYSsaAE6TNSYqehagtCVfDlR2gpH28YCfnpK4z1lfVrWbAIgsqlRDoUGQ 
 
 ###
 // create a new comment
@@ -98,8 +99,28 @@ content-type: application/json
 
 {
   "content": "test comment 3",
-  "author": "631b5b429cef2e52ace6f960",
+  "author": "631bba3511d8b2dea3b18f0f",
   "post": "631b37da709d1e95e569061e"
 }
 
-   
+###
+// *** /REGISTER routes *******************
+
+// register a new user
+POST http://localhost:3000/register
+content-type: application/json
+
+{
+  "username": "a@test.com",
+  "password": "test"
+}
+
+### 
+// *** /LOGIN routes *******************
+POST http://localhost:3000/login
+content-type: application/json
+
+{
+  "username": "a@test.com",
+  "password": "test"
+}

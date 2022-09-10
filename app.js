@@ -1,63 +1,42 @@
-var createError = require('http-errors');
+const cors = require('cors');
 var express = require('express');
 var path = require('path');
-var cookieParser = require('cookie-parser');
+const passport = require('passport');
 var logger = require('morgan');
-var fileUpload = require('express-fileupload');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 
-var indexRouter = require('./routes/index');
+// import routes
 var userRouter = require('./routes/user');
 const postRouter = require('./routes/post');
-const templateRouter = require('./routes/template');
 const commentRouter = require('./routes/comment');
 const adminRouter = require('./routes/admin');
+const registerRouter = require('./routes/register');
+const loginRouter = require('./routes/login');
 
 var app = express();
 
-// setup mongoose
-const mongoose = require('mongoose');
-const mongoDB = process.env.MONGODB_URI; 
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+// Configures the database and opens a global connection that can be used in any module with `mongoose.connection`
+require('./config/database');
+
+// Pass the global passport object into the configuration function
+require('./config/passport')(passport);
+
+// This will initialize the passport object on every request
+app.use(passport.initialize());
 
 // setup middleware
 app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(fileUpload());
-
-
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.use(express.json()); // Instead of using body-parser middleware
+app.use(express.urlencoded({ extended: true })); // Instead of using body-parser middleware, use the new Express implementation of the same thing
+app.use(express.static(path.join(__dirname, 'public'))); // Serve static files from the public folder
+app.use(cors()); // allows our front end application to make HTTP requests to Express application
 
 // use our routes
-app.use('/', indexRouter);
 app.use('/user', userRouter);
 app.use('/post', postRouter);
-app.use('/template', templateRouter);
 app.use('/comment', commentRouter);
 app.use('/admin', adminRouter);
-
-// catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
-});
+app.use('/register', registerRouter);
+app.use('/login', loginRouter);
 
 module.exports = app;

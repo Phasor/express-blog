@@ -2,6 +2,8 @@ const Comment = require('../models/comment');
 const Post = require('../models/post');
 const {body, validationResult} = require('express-validator');
 const mongoose = require('mongoose');
+const jwt = require("jsonwebtoken");
+
 
 exports.comment_get = (req, res, next) => {
     Comment.find()
