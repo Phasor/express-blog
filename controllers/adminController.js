@@ -11,7 +11,7 @@ exports.admin_get = (req, res, next) => {
 }
 
 exports.admin_create = [
-    body('email', 'Email must not be empty.').trim().isLength({ min: 1 }).escape(),
+    body('username', 'Email must not be empty.').trim().isLength({ min: 1 }).escape(),
     body('password', 'Password must not be empty.').trim().isLength({ min: 1 }).escape(),
 
     // Process request after validation and sanitization.

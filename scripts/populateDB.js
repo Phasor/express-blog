@@ -3,13 +3,12 @@ const csv = require('fast-csv'); // parses CSV files
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-const dotenv = require('dotenv');
-dotenv.config();
+require('dotenv').config();
 
 const main = async () => {
 
     // connect to db
-    const mongoDB = process.env.MONGODB_URI; 
+    const mongoDB = process.env.DB_STRING; 
     mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
     const db = mongoose.connection;
     db.on('error', console.error.bind(console, 'MongoDB connection error:'));

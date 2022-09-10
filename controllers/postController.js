@@ -15,22 +15,6 @@ exports.post_get = (req, res, next) => {
     });
 }
 
-exports.post_template = (req, res, next) => {
-    const fields = ['title', 'content', 'author', 'date', 'published'];
-    const opts = { fields };
-    const myData = '';
-
-    try {
-        const csv = parse(myData, opts);
-        res.set("Content-Disposition", "attachment;filename=posts.csv");
-        res.set("Content-Type", "application/octet-stream");
-        res.send(csv);
-    } catch (err) {
-        res.render('error', { error: err });
-    }
-}
-
-
 exports.post_create_post = [
     // validate the data
     body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),
