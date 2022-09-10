@@ -1,6 +1,6 @@
 const User = require('../models/user');
 const {body, validationResult} = require('express-validator');
-const bcrypt = require('bcryptjs'); // hash passwords
+const utils = require('../lib/utils');
 
 exports.user_get = (req, res, next) => {
     User.find()
@@ -20,7 +20,6 @@ exports.user_getById = (req, res, next) => {
         res.json({user});
     });
 }
-
 
 exports.user_create_post = (req, res, next) => {
     const saltHash = utils.genPassword(req.body.password);

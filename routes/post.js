@@ -9,7 +9,9 @@ router.get('/', postController.post_get);
 
 // admin only routes
 router.post('/', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_create_post,);
+router.post('/:id/publish', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_publish);
 router.delete('/:id', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_delete);
 router.put('/:id', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_update);
 
 module.exports = router;
+

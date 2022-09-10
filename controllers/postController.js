@@ -101,6 +101,20 @@ exports.post_update = [
     }
 ];
 
+exports.post_publish = (req, res, next) => {
+    Post.findByIdAndUpdate(req.params.id, 
+        {
+            published: true
+        }, 
+        (err, post) => {
+            if (err) {
+                res.json({ error: err });
+            }
+            res.json({message: "published the following post",post: post});
+        }
+    );
+}
+
 
   
             
