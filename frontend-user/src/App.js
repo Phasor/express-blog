@@ -1,9 +1,11 @@
 import './index.css'
+import Home from './pages/Home';
+
 
 function App() {
   return (
     <>
-    <p>Welcome to the Blog</p>
+        <Home/>
     </>
   );
 }
