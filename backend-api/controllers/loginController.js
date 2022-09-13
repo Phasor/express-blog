@@ -22,7 +22,7 @@ exports.login_post = [
         User.findOne({ username: req.body.username})
         .then((user) => {
             if(!user) {
-                return res.status(401).json({ success: false, mge: 'User not found' });
+                return res.status(401).json({ success: false, message: 'User not found' });
             }
             // check if supplied password is correct
             const isValid = utils.validPassword(req.body.password, user.hash, user.salt);
@@ -32,7 +32,7 @@ exports.login_post = [
                 const tokenObject = utils.issueJWT(user);
                 res.status(200).json({ success: true, user: user, token: tokenObject.token, expiresIn: tokenObject.expires });
             } else{ // wrong password
-                res.status(401).json({ success: false, msg: 'You entered the wrong password' });
+                res.status(401).json({ success: false, message: 'You entered the wrong password' });
             }
         })
         .catch((err) => {

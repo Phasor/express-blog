@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Post from './Post';
 
-export default function PostList() {
+export default function PostList(props) {
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
@@ -15,13 +15,13 @@ export default function PostList() {
         }
         getPosts()
         .catch(err => console.log(err));
-    }, [])
+    }, [posts])
 
 return(
     <div>
         {
             posts.map(post => (
-                <Post key={post._id} post={post}/>
+                <Post key={post._id} post={post} isLoggedIn={props.isLoggedIn} username={props.username}/>
             ))
         }
     </div>
