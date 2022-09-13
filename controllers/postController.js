@@ -1,5 +1,4 @@
 const Post = require('../models/post');
-const { parse } = require('json2csv');
 const mongoose = require('mongoose');
 const { body,validationResult } = require('express-validator'); // post data sanitization and validation
 
@@ -34,6 +33,7 @@ exports.post_create_post = [
         // author is a string, but we need to convert it to an ObjectId
         var authorID = new mongoose.Types.ObjectId(req.body.author);
 
+        // new posts are default unpublished
         const post = new Post({
             title: req.body.title,
             content: req.body.content,
@@ -106,11 +106,12 @@ exports.post_publish = (req, res, next) => {
         {
             published: true
         }, 
+        {new: true}, // return the updated post
         (err, post) => {
             if (err) {
                 res.json({ error: err });
             }
-            res.json({message: "published the following post",post: post});
+            res.json({message: "Published post",post: post});
         }
     );
 }
