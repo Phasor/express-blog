@@ -107,7 +107,7 @@ exports.post_update = [
                 if (err) {
                    return res.json({ error: err });
                 }
-                res.json({message: "updated the following post (this is the pre change version)",post: post});
+                res.json({message: "updated the following post (this is the pre change version)",post: post, success: true});
             }
         );
     }
@@ -123,7 +123,22 @@ exports.post_publish = (req, res, next) => {
             if (err) {
                 return res.json({ error: err });
             }
-            res.json({message: "Published post",post: post});
+            res.json({message: "Published post",post: post, success: true});
+        }
+    );
+}
+
+exports.post_unpublish = (req, res, next) => {
+    Post.findByIdAndUpdate(req.params.id, 
+        {
+            published: false
+        }, 
+        {new: true}, // return the updated post
+        (err, post) => {
+            if (err) {
+                return res.json({ error: err });
+            }
+            res.json({message: "Unpublished post",post: post, success: true});
         }
     );
 }

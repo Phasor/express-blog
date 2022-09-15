@@ -13,12 +13,15 @@ router.get('/:id', postController.post_get_single);
 // *** admin only routes ***
 // create a new post
 router.post('/', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_create_post);
-// get post by id
-router.post('/:id/publish', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_publish);
+// publish post
+router.put('/:id/publish', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_publish);
+// unpublish a post
+router.put('/:id/unpublish', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_unpublish);
 // delete post
 router.delete('/:id', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_delete);
 // update post
 router.put('/:id', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_update);
+
 
 module.exports = router;
 
