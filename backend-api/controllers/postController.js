@@ -15,7 +15,8 @@ exports.post_get = (req, res, next) => {
 }
 
 exports.post_get_single = (req, res, next) => {
-    Post.findById(req.params.id)
+    var postID = new mongoose.Types.ObjectId(req.params.id);
+    Post.findById(postID)
     .populate('author')
     .exec((err, post) => {
         if (err) {
