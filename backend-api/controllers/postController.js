@@ -4,7 +4,7 @@ const { body,validationResult } = require('express-validator'); // post data san
 
 exports.post_get = (req, res, next) => {
     Post.find()
-    .sort([['date', 'ascending']])
+    .sort([['date', 'descending']])
     .populate('author')
     .exec((err, posts) => {
         if (err) { 
@@ -26,7 +26,7 @@ exports.post_create_post = [
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // There are errors.
-            res.json({errors: errors.array()});
+            return res.json({errors: errors.array()});
         }
 
         // post data is valid, save Post
@@ -44,9 +44,9 @@ exports.post_create_post = [
     
         post.save((err) => {
             if (err) {
-                res.json({ error: err });
+                return res.json({ error: err, successful: false, message: "Can not save post." });
             }
-            res.json({post: post});
+            res.json({post: post, successful: true, message: "Post saved."});
         });
     }
 ];
@@ -54,7 +54,7 @@ exports.post_create_post = [
 exports.post_delete = (req, res, next) => {
     Post.findByIdAndRemove(req.params.id, (err, post) => {
         if (err) {
-            res.json({ error: err });
+            return res.json({ error: err, successful: false, message: "Can not find post." });
         }
         res.json({message: "Deleted the following post", post: post});
     });
@@ -76,7 +76,7 @@ exports.post_update = [
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
             // There are errors.
-            res.json({errors: errors.array()});
+            return res.json({errors: errors.array()});
         }
 
         // post data is valid, save Post
@@ -93,7 +93,7 @@ exports.post_update = [
             }, 
             (err, post) => {
                 if (err) {
-                    res.json({ error: err });
+                   return res.json({ error: err });
                 }
                 res.json({message: "updated the following post (this is the pre change version)",post: post});
             }
@@ -109,7 +109,7 @@ exports.post_publish = (req, res, next) => {
         {new: true}, // return the updated post
         (err, post) => {
             if (err) {
-                res.json({ error: err });
+                return res.json({ error: err });
             }
             res.json({message: "Published post",post: post});
         }
