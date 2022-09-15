@@ -8,7 +8,7 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
-    const refreshParent = () => {
+    const refreshHome = () => {
         setRefresh(!refresh);
     }
 
@@ -28,11 +28,12 @@ export default function Home() {
   return (
     <>
         <div>
-            <Header/>   
+            <Header isLoggedIn={isLoggedIn}/>   
             {isLoggedIn ? <h1>Welcome {username}</h1> : <h1>Welcome</h1>}
             <PostList 
                 isLoggedIn={isLoggedIn} 
                 username={username} 
+                refreshHome={refreshHome}
             />
             <Link to="/login">Log In</Link>
         </div>

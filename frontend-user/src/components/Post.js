@@ -5,6 +5,7 @@ export default function Post({setPosts, post, isLoggedIn, username, refreshHome}
 
     const postComment = async (e) => {
         try{
+            e.preventDefault();
             const response = await fetch(
                 'http://localhost:3000/comment',
                 {method: 'POST',
@@ -53,10 +54,10 @@ export default function Post({setPosts, post, isLoggedIn, username, refreshHome}
             </div>
         ))}
         {isLoggedIn && 
-            <div>   
+            <form onSumbit={postComment}>   
                 <input type="text" placeholder="Leave comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
-                <button onClick={postComment}>Post Comment</button>
-            </div>
+                <button type="submit" onClick={postComment}>Post Comment</button>
+            </form>
         }    
         <p>---------------------------------------------------------------------------------------</p>
     </div>

@@ -6,8 +6,10 @@ import {
     Navigate
   } from "react-router-dom";
   //import components
-  import Home from './pages/Home';
-  import Login from './pages/Login';
+import Home from './pages/Home';
+import Login from './pages/Login';
+import Logout from './pages/Logout';
+import Signup from './pages/Signup';
 
 
 function App() {
@@ -16,6 +18,8 @@ function App() {
         <div>
             <Routes>
                 <Route exact path="/login" element={<Login/>}/>
+                <Route exact path="/logout" element={<Logout/>}/>
+                <Route exact path="/signup" element={<Signup/>}/>
                 <Route path="/" element={<Home/>}/>
                 {/* No match route */}
                 <Route path="*" element={<Navigate to="/" replace />}/>

@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom';
+import Header from '../components/Header'
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -48,12 +49,13 @@ export default function Login() {
 
   return (
     <div>
+        <Header/>
         <h1>Log In</h1>
         <form onSubmit={LoginUser}>
             <label htmlFor="username">Email</label>
-            <input type="text" value={username} onChange={(e) => {setUsername(e.target.value)}} name="username" id="username"/>
+            <input type="text" placeholder="adam@gmail.com" value={username} onChange={(e) => {setUsername(e.target.value)}} name="username" id="username"/>
             <label htmlFor="password">Password</label>
-            <input type="password" value={password} onChange={(e) => {setPassword(e.target.value)}} name="password" id="password"/>
+            <input type="password" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} name="password" id="password"/>
             <input type="submit" value="Submit"/>
         </form>
         {errors && errors.map(error => <p>{error}</p>)}
