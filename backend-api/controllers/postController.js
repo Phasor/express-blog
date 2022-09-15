@@ -14,6 +14,17 @@ exports.post_get = (req, res, next) => {
     });
 }
 
+exports.post_get_single = (req, res, next) => {
+    Post.findById(req.params.id)
+    .populate('author')
+    .exec((err, post) => {
+        if (err) {
+            return res.json(err);
+        }
+        res.json({post, success: true});
+    });
+}
+
 exports.post_create_post = [
     // validate the data
     body('title', 'Title must not be empty.').trim().isLength({ min: 1 }).escape(),

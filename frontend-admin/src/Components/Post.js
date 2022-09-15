@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Post({post, isLoggedIn, setPosts}) {
     const[error, setError] = useState(null)
@@ -30,6 +31,9 @@ export default function Post({post, isLoggedIn, setPosts}) {
             }
         }
 
+        const editPost = async (id) => {
+        }
+
   return (
     <div>
         <h1>{post.title}</h1>
@@ -37,10 +41,9 @@ export default function Post({post, isLoggedIn, setPosts}) {
         <p>`Author: email: {post.author.username}, id:{post.author._id}`</p>
         <p>Posted: {post.date}</p>
         <p>Published: {JSON.stringify(post.published)}</p>
-        {isLoggedIn && (
-            <button onClick={deletePost}>Delete Post</button>
-            )
-        }
+        {isLoggedIn && <button onClick={deletePost}>Delete Post</button>}
+        {isLoggedIn && <Link to={`/post/${post._id}`}><button onClick={editPost}>Edit Post</button></Link>}
+
         <p>Comments</p>
         {post.comments.map(comment => (
             <div key={comment._id}>

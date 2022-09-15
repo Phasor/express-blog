@@ -7,6 +7,8 @@ const passport = require('passport');
 // *** open routes ***
 // get all posts
 router.get('/', postController.post_get);
+// get a single post
+router.get('/:id', postController.post_get_single);
 
 // *** admin only routes ***
 // create a new post
