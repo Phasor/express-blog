@@ -3,10 +3,15 @@ import PostList from '../components/PostList';
 import Header from '../components/Header';
 import {Link} from 'react-router-dom';
 
-
 export default function Home() {
   const [username, setUsername] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [refresh, setRefresh] = useState(false);
+
+    const refreshParent = () => {
+        setRefresh(!refresh);
+    }
+
 
   useEffect(() => {
     const getUsername = async () => {
@@ -25,7 +30,10 @@ export default function Home() {
         <div>
             <Header/>   
             {isLoggedIn ? <h1>Welcome {username}</h1> : <h1>Welcome</h1>}
-            <PostList isLoggedIn={isLoggedIn} username={username}/>
+            <PostList 
+                isLoggedIn={isLoggedIn} 
+                username={username} 
+            />
             <Link to="/login">Log In</Link>
         </div>
     </>

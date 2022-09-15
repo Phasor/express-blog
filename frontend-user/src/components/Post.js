@@ -1,7 +1,7 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState } from 'react'
 
-export default function Post(props) {
-    const [comment, setComment] = useState('');
+export default function Post({setPosts, post, isLoggedIn, username, refreshHome}) {
+    const [comment, setComment] = useState(null);
 
     const postComment = async (e) => {
         try{
@@ -15,11 +15,22 @@ export default function Post(props) {
                 body: JSON.stringify({
                     content: comment,
                     author: localStorage.getItem('userId'),
-                    post: props.post._id
+                    post: post._id
                 })}
             );
+
             const commentJson = await response.json();
             console.log(commentJson);
+            setComment('');
+
+            const refreshedPosts = await fetch(
+                'http://localhost:3000/post',
+                {method: 'GET'}
+                )
+            const refreshedPostsJson = await refreshedPosts.json();
+            console.log(refreshedPostsJson);
+            setPosts(refreshedPostsJson);
+
         } catch(err) {
             console.log(err);
         }
@@ -28,12 +39,12 @@ export default function Post(props) {
 
   return (
     <div>
-        <h1>{props.post.title}</h1>
-        <p>{props.post.content}</p>
-        <p>Author: {props.post.author.username}</p>
-        <p>Posted: {props.post.date}</p>
+        <h1>{post.title}</h1>
+        <p>{post.content}</p>
+        <p>Author: {post.author.username}</p>
+        <p>Posted: {post.date}</p>
         <p>Comments:</p>
-        {props.post.comments.map(comment => (
+        {post.comments.map(comment => (
             <div key={comment._id}>
                 <p >{comment.content}</p>
                 <p >{comment.date}</p>
@@ -41,7 +52,7 @@ export default function Post(props) {
                 <p>-------------------</p>
             </div>
         ))}
-        {props.isLoggedIn && 
+        {isLoggedIn && 
             <div>   
                 <input type="text" placeholder="Leave comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
                 <button onClick={postComment}>Post Comment</button>
