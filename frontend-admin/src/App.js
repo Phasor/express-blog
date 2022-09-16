@@ -9,7 +9,7 @@ import Login from './Pages/Login';
 import Logout from './Pages/Logout';
 import Users from './Pages/Users';
 import CreatePost from "./Pages/CreatePost";
-import PostDetail from "./Pages/PostDetail";
+import PostDetail from "./Components/PostDetail";
 import PrivateRoutes from "./Components/PrivateRoutes";
 
 function App() {

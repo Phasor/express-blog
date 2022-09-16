@@ -51,7 +51,23 @@ export default function PostDetail() {
     }
 
 
-    const deleteComment = async (e) => {
+    const deleteComment = async (commentID) => {
+        try {
+            const response = await fetch(`http://localhost:3000/comment/${commentID}`,
+            {method: 'DELETE',
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }})
+            const jsonData = await response.json()
+            console.log(jsonData)
+            if(jsonData.success === true) {
+                setStatusMessage("Comment deleted successfully")
+            } else {
+                setStatusMessage("Comment delete failed")
+            }
+        } catch(err) {
+            console.error(err.message)
+        }
     }
 
     const handlePublish = async (e) => {
@@ -70,9 +86,9 @@ export default function PostDetail() {
             setStatusMessage("Post update failed")
         }
         // reload the page
-        const updatedPpst = await fetch(`http://localhost:3000/post/${id}`,
+        const updatedPost = await fetch(`http://localhost:3000/post/${id}`,
         {method: 'GET'})
-        const updatedPostJson = await updatedPpst.json()
+        const updatedPostJson = await updatedPost.json()
         setPost(updatedPostJson)
         setPostContent(updatedPostJson.post.content)
         setPostTitle(updatedPostJson.post.title)
@@ -108,13 +124,14 @@ export default function PostDetail() {
         {post && 
             <div>
                 <Link to='/'><h1>Edit Post</h1></Link>
+                <p>Post ID: {post.post._id}</p>
                 <form onSubmit={updatePost}>
                     <label htmlFor="title">Title</label>
                     <input type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} name="title"/>
                     <br></br>
                     <label htmlFor="content">Post Content</label>
                     <textarea value={postContent} onChange={(e) => setPostContent(e.target.value)} name="content" rows="10" cols="100"/>
-                    <p>`Author: email: {post.post.author.username}, id:{post.post.author._id}`</p>
+                    <p>Author: email: {post.post.author.username}, id:{post.post.author._id}</p>
                     <p>Posted: {post.post.date}</p>
                     <p>Published: {JSON.stringify(post.post.published)}</p>
                 <button type="submit" onClick={updatePost}>Update Post</button>
@@ -127,8 +144,9 @@ export default function PostDetail() {
                     <div key={comment._id}>
                         <p>{comment.content}</p>
                         <p>{comment.date}</p>
-                        <p>{comment.author}</p>
-                        <button onClick={deleteComment}>Delete Comment</button>
+                        <p>Comment Author: {comment.author}</p>
+                        <p>Comment ID: {comment._id}</p>
+                        <button onClick={() => deleteComment(comment._id)}>Delete Comment</button>
                         <p>------------------------</p>
                     </div>
                 ))} 

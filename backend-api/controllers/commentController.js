@@ -59,11 +59,34 @@ exports.comment_create = [
                     if (err) { 
                         return res.json(err); 
                     }
-                    res.json({message: "New post created",post:post});
+                    res.json({message: "Comment created",post:post, success: true});
                 }
             )
         }
     }
 ]
 
+exports.comment_deleteById = (req, res, next) => {
 
+    // delete comment from Comment collection
+    Comment.findByIdAndRemove(req.params.id, (err, comment) => {
+        if (err) { 
+            return res.json(err); 
+        }
+        console.log("Comment deleted from Comment collection");
+    })
+    // delete comment from Post collection
+    Post.findOne({"comments._id": req.params.id}, (err, post) => {
+        if (err) { 
+            return res.json(err); 
+        }
+        post.comments.id(req.params.id).remove();
+        post.save((err, post) => {
+            if (err) { 
+                return res.json(err); 
+            }
+            console.log("Comment deleted from Post collection");
+            res.json({message: "Comment deleted.",post:post, success: true});
+        })
+    })
+}

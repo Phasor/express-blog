@@ -11,5 +11,6 @@ router.get('/', passport.authenticate('jwt', {session: false}), isAdmin, comment
 
 // must be logged in to create a comment
 router.post('/', passport.authenticate('jwt', {session: false}) ,commentController.comment_create);
+router.delete('/:id', passport.authenticate('jwt', {session: false}), isAdmin, commentController.comment_deleteById);
 
 module.exports = router;

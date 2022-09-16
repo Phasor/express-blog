@@ -31,8 +31,7 @@ export default function Post({post, isLoggedIn, setPosts}) {
             }
         }
 
-        const editPost = async (id) => {
-        }
+   
 
   return (
     <div>
@@ -42,14 +41,15 @@ export default function Post({post, isLoggedIn, setPosts}) {
         <p>Posted: {post.date}</p>
         <p>Published: {JSON.stringify(post.published)}</p>
         {isLoggedIn && <button onClick={deletePost}>Delete Post</button>}
-        {isLoggedIn && <Link to={`/post/${post._id}`}><button onClick={editPost}>Edit Post</button></Link>}
+        {isLoggedIn && <Link to={`/post/${post._id}`}><button>Edit Post</button></Link>}
 
         <p>Comments</p>
         {post.comments.map(comment => (
             <div key={comment._id}>
                 <p>{comment.content}</p>
                 <p>{comment.date}</p>
-                <p>{comment.author}</p>
+                <p>Comment Author: {comment.author}</p>
+                <p>Comment ID: {comment._id} </p>
                 <p>------------------------</p>
             </div>
         ))}
