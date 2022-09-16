@@ -65,6 +65,23 @@ export default function PostDetail() {
             } else {
                 setStatusMessage("Comment delete failed")
             }
+
+            // update the post like (remove the deleted comment)
+            try{
+                const getPost = async () => {
+                    const response = await fetch(`http://localhost:3000/post/${id}`,
+                    {method: 'GET'})
+                    const jsonData = await response.json()
+                    setPost(jsonData)
+                    setPostContent(jsonData.post.content)
+                    setPostTitle(jsonData.post.title)
+                    console.log(jsonData)
+                }
+                getPost()
+            } catch(err) {
+                console.error(err.message)
+            }
+
         } catch(err) {
             console.error(err.message)
         }
