@@ -22,6 +22,7 @@ export default function Login() {
                 localStorage.setItem('token', jsonData.token)
                 localStorage.setItem('username', jsonData.user.username)
                 localStorage.setItem('userId', jsonData.user._id)
+                localStorage.setItem('admin', jsonData.user.admin)
                 console.log(jsonData)
                 window.location = '/'
             }

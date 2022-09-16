@@ -7,8 +7,12 @@ export default function PostList({ isLoggedIn }) {
     useEffect(() => {
         try{
             const getPosts = async () => {
-                const response = await fetch('http://localhost:3000/post',
-                {method: 'GET'})
+                const response = await fetch('http://localhost:3000/post/all',
+                {method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': localStorage.getItem('token')
+                }})
                 const jsonData = await response.json()
                 setPosts(jsonData)
             }

@@ -2,7 +2,21 @@ const Post = require('../models/post');
 const mongoose = require('mongoose');
 const { body,validationResult } = require('express-validator'); // post data sanitization and validation
 
+// returns published posts only, open route
 exports.post_get = (req, res, next) => {
+    Post.find({'published': true})
+    .sort([['date', 'descending']])
+    .populate('author')
+    .exec((err, posts) => {
+        if (err) { 
+            return res.json(err); 
+        }
+        res.json(posts);
+    });
+}
+
+// returns all published AND unpublished posts, Admin only route
+exports.post_get_admin = (req, res, next) => {
     Post.find()
     .sort([['date', 'descending']])
     .populate('author')

@@ -10,6 +10,7 @@ import Logout from './Pages/Logout';
 import Users from './Pages/Users';
 import CreatePost from "./Pages/CreatePost";
 import PostDetail from "./Pages/PostDetail";
+import PrivateRoutes from "./Components/PrivateRoutes";
 
 function App() {
 
@@ -18,11 +19,13 @@ function App() {
     <div>
         <Routes>
             <Route exact path="/login" element={<Login/>}/>
-            <Route exact path="/logout" element={<Logout/>}/>
-            <Route exact path="/users" element={<Users/>}/>
-            <Route exact path="/create-post" element={<CreatePost/>}/>
-            <Route path="/post/:id" element={<PostDetail/>}/>
-            <Route path="/" element={<Home/>}/>
+            <Route element={<PrivateRoutes/>}>
+                <Route exact path="/logout" element={<Logout/>}/>
+                <Route exact path="/users" element={<Users/>}/>
+                <Route exact path="/create-post" element={<CreatePost/>}/>
+                <Route path="/post/:id" element={<PostDetail/>}/>
+                <Route path="/" element={<Home/>}/>
+            </Route>
             {/* No match route */}
             <Route path="*" element={<Navigate to="/" replace />}/>
         </Routes>

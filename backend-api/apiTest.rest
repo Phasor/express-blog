@@ -1,9 +1,15 @@
 
 // *** /POST routes *******************
 
-// get all posts
+// get all published posts
 GET http://localhost:3000/post
 content-type: application/json
+
+###
+// get all posts - published and unpublished
+GET http://localhost:3000/post/all
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzFjZWEzYzhhZjE1MWE4ZjgyODdiMzEiLCJpYXQiOjE2NjMzNDY4Mzk5MzcsImV4cCI6MTY2MzM0NjkyNjMzN30.GdZZRTv-42pD5JLuMq2UImOfc1Udj-g7rjSHKFI0wV_BSMB_1EE6fnyOINwd9UDqIPCfjy1RYZpNkCdxiFpBD3nccgOJNwvU16MZrs7w9VKpTWIQO8M6nNyof15KS5NnxbjGHKaef80Yel0tM4d8t63IXAJKXf_q9bjnPa29HJyPHH3ou_Eki5-YoF1csGl0Jc1HMtKCDe48mWy9G3LQ7jC678XLF5tpo9HuMJBPb-uJLKitV5ViptzTDYjvTI4Qix1g2zxVVItkxN6B8odBXz9RlYpNmlp3kq9OPS5n-z7kft32nBEMDJNu5I8u0mdgp7ecXgdSVYVBNpimBInaMfUc42IT82zDU7VAq5h958H_huH5HrYt-E4Uk9NKcuUA9hwoIH249MLKimbBH6Ec9e00xArlYSiD-E4ke_JfDnmvsmGJ818xpglo_vu9uVJ4QfQtWkccP-S9EqJry6-enAdzMH_iaVIkV2dFb1IOU5-Kg4KLxf7h1ulBV4Gzw1OaXXzuFJgQ4YbzZb27wWFSI--kw4xqUOFnHVS_zir-yxBSK-Q-wsER_DgUHNpzaxGJacZBoqyNVI3zaUwP_yf6G6CFdkR_3-rz2omYXjHgQeFcFqAw8pjoorDjVy9jOOyZiI1cCPPuzv8-tS-8W1xftRKYm-ewTjYOUUoe6ebODlo
 
 ###
 // get post by id
@@ -129,6 +135,6 @@ POST http://localhost:3000/login
 content-type: application/json
 
 {
-  "username": "b@test.com",
+  "username": "a@test.com",
   "password": "test"
 }

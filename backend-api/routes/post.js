@@ -4,13 +4,15 @@ const postController = require('../controllers/postController');
 const isAdmin = require('../lib/utils').isAdmin;
 const passport = require('passport');
 
-// *** open routes ***
-// get all posts
+
+// get all published posts- open route
 router.get('/', postController.post_get);
-// get a single post
+// get ALL posts, published or unpublished - admin only
+router.get('/all', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_get_admin);
+// get a single post - open route
 router.get('/:id', postController.post_get_single);
 
-// *** admin only routes ***
+// *** other admin only routes ***
 // create a new post
 router.post('/', passport.authenticate('jwt', {session: false}), isAdmin, postController.post_create_post);
 // publish post
