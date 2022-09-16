@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useParams, Link } from 'react-router-dom'
 
 export default function PostDetail() {
     const [post, setPost] = useState('')
@@ -69,7 +69,13 @@ export default function PostDetail() {
         } else {
             setStatusMessage("Post update failed")
         }
-        console.log(statusMessage)
+        // reload the page
+        const updatedPpst = await fetch(`http://localhost:3000/post/${id}`,
+        {method: 'GET'})
+        const updatedPostJson = await updatedPpst.json()
+        setPost(updatedPostJson)
+        setPostContent(updatedPostJson.post.content)
+        setPostTitle(updatedPostJson.post.title)
     }
 
     const handleUnpublish = async (e) => {
@@ -87,7 +93,13 @@ export default function PostDetail() {
         } else {
             setStatusMessage("Post update failed")
         }
-        console.log(statusMessage)
+        // reload the page
+        const updatedPpst = await fetch(`http://localhost:3000/post/${id}`,
+        {method: 'GET'})
+        const updatedPostJson = await updatedPpst.json()
+        setPost(updatedPostJson)
+        setPostContent(updatedPostJson.post.content)
+        setPostTitle(updatedPostJson.post.title)
     }
     
   
@@ -95,7 +107,7 @@ export default function PostDetail() {
     <>
         {post && 
             <div>
-                <h1>Edit Post</h1>
+                <Link to='/'><h1>Edit Post</h1></Link>
                 <form onSubmit={updatePost}>
                     <label htmlFor="title">Title</label>
                     <input type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} name="title"/>
