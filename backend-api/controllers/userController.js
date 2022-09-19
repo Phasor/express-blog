@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const {body, validationResult} = require('express-validator');
 const utils = require('../lib/utils');
+const mongoose = require('mongoose');
 
 exports.user_get = (req, res, next) => {
     User.find()
@@ -11,13 +12,14 @@ exports.user_get = (req, res, next) => {
     });    
 }
 
-exports.user_getById = (req, res, next) => {    
-    User.findById(req.params.id)
+exports.user_getById = (req, res, next) => { 
+    var userID = new mongoose.Types.ObjectId(req.params.id);
+    User.findById(userID)
     .exec((err, user) => {
-        if (err) { 
-            return res.json(err); 
+        if (err) {
+            return res.json(err);
         }
-        res.json({user});
+        res.json({user, success: true});
     });
 }
 

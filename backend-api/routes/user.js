@@ -9,10 +9,11 @@ const isAdmin = require('../lib/utils').isAdmin;
 router.post('/', userController.user_create_post);
 
 // *** admin only routes ***
-// get all users
-router.get('/', passport.authenticate('jwt', {session: false}), isAdmin, userController.user_get);
 // get user by id
 router.get('/:id', passport.authenticate('jwt', {session: false}), isAdmin, userController.user_getById);
+// get all users
+router.get('/', passport.authenticate('jwt', {session: false}), isAdmin, userController.user_get);
+
 // delete user
 router.delete('/:id', passport.authenticate('jwt', {session: false}), isAdmin, userController.user_delete);
 // update user

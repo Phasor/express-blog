@@ -1,4 +1,5 @@
 const Post = require('../models/post');
+const Comment = require('../models/comment');
 const mongoose = require('mongoose');
 const { body,validationResult } = require('express-validator'); // post data sanitization and validation
 
@@ -78,12 +79,22 @@ exports.post_create_post = [
 ];
 
 exports.post_delete = (req, res, next) => {
+    // delete post from Post collection
     Post.findByIdAndRemove(req.params.id, (err, post) => {
         if (err) {
             return res.json({ error: err, successful: false, message: "Can not find post." });
         }
-        res.json({message: "Deleted the following post", post: post});
+        console.log("Post deleted: " + post);
     });
+
+    // delete all comments attached to the post
+    const response = Comment.deleteMany({post: req.params.id}, (err, comments) => {
+        if (err) {
+            return res.json({ error: err, successful: false, message: "Can not find comments." });
+        }
+        res.json({message: "Deleted the post and its comments", success: true, commentsDeleted: response.deletedCount});
+    });
+
 }
 
 exports.post_update = [

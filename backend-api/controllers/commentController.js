@@ -14,6 +14,19 @@ exports.comment_get = (req, res, next) => {
     });    
 }
 
+exports.comment_get_by_userId = (req, res, next) => { 
+    // *** this gets comments by the USER ID, not comment ID ***
+    var userID = new mongoose.Types.ObjectId(req.params.id);
+    Comment.find({author: userID})
+    .sort([['date', 'descending']])
+    .exec((err, comments) => {
+        if (err) {
+            return res.json(err);
+        }
+        res.json({comments, success: true});
+    });
+}
+
 exports.comment_create = [
     // Validate fields.
     body('content', 'Content must not be empty.').trim().isLength({ min: 1 }).escape(),

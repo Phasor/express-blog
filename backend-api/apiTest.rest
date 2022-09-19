@@ -91,6 +91,13 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzFjZWEzY
 }
 
 ###
+// fetch user by id
+GET http://localhost:3000/user/631cea178af151a8f8287b2f
+content-type: application/json
+Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzFjZWEzYzhhZjE1MWE4ZjgyODdiMzEiLCJpYXQiOjE2NjI4NDY0MzM4NTcsImV4cCI6MTY2Mjg0NjUyMDI1N30.tmOKaXWVlambEG_Nc4waQAgfurLQuNeu_ffBjVY1Rvf4YUceForcFXkf011qTAAsYMkwzzmJp-RXBFk9ZH-Zd2SHJGD-K5vfjzDFrcUaoBUuA7ZjXyPjEilCG5hovar_6Zx4Xj1whbSk5ZMqKCGi-xd8N9xiesjBSCEH-gCBH6HP4Vhid9IL6ksam1LUGy5zyk6mtlfX1492cfAN0wWWqV2RC6PCC9tIkVR4_EYwYkhGFxBbzMR6_K-Tly7WtbcFmi1zSN3S9dOdKc1hwH9vn32c429OGnvsjP4tIgSZt6SY33NyYHO1PTlOULXny5lTaBcxk2DeRfdMzX-vjqcLlu8yToiYVOt9Jt9qRkXRSIyXAV4ZfliNJSGGyxGXaqlhCeUqfyKh6OEdHNH6hBa209tozp8fGRK9fiZXCgHoU5FWFrNkZeLJwrGj_v44a4CxtEPIWUGEqIqGhV594QDi7LDjpwCPGm3FJqYAfCIWaO1Kenc2vM0cEmie5MIcOuSKBPczKKFWuqT6E7FHe8e1OZ8A2Gn3xj69mJtyMzQxj3aZJMZeCMpvt0oVB3XYFpvAlkPzWgAXgziOLAFTmKDD-MkJF7pWSxuZfBSV_lZBX_TdSD2zfA51S1nbk9glE3HPMiOmgNmKJ9WMBleuatLBs6grLU4NI3F5nia9P6KLioM
+
+###
+
 // *** /ADMIN routes *******************
 
 // get all admins

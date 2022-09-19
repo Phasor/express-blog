@@ -8,6 +8,7 @@ import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Logout from './Pages/Logout';
 import Users from './Pages/Users';
+import UserDetail from './Components/UserDetail';
 import CreatePost from "./Pages/CreatePost";
 import PostDetail from "./Components/PostDetail";
 import PrivateRoutes from "./Components/PrivateRoutes";
@@ -21,6 +22,7 @@ function App() {
             <Route exact path="/login" element={<Login/>}/>
             <Route element={<PrivateRoutes/>}>
                 <Route exact path="/logout" element={<Logout/>}/>
+                <Route path="/users/:id" element={<UserDetail/>}/>
                 <Route exact path="/users" element={<Users/>}/>
                 <Route exact path="/create-post" element={<CreatePost/>}/>
                 <Route path="/post/:id" element={<PostDetail/>}/>
