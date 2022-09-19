@@ -4,7 +4,7 @@ import { useParams, Link } from 'react-router-dom'
 export default function PostDetail() {
     const [post, setPost] = useState('')
     const { id } = useParams()
-    const [statusMessage, setStatusMessage] = useState(null)
+    const [statusMessage, setStatusMessage] = useState("")
     const [postContent, setPostContent] = useState("")
     const [postTitle, setPostTitle] = useState("")
 
@@ -26,7 +26,7 @@ export default function PostDetail() {
     }, [id])
     
     const updatePost = async (e) => {
-        const response = fetch(`http://localhost:3000/post/${id}`,
+        const response = await fetch(`http://localhost:3000/post/${id}`,
             {method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ export default function PostDetail() {
             })
         const responseJson = await response.json()
         console.log(`responsejson: ${responseJson}`)
-        if(responseJson.success === true) {
+        if(response.ok) {
             setStatusMessage("Post updated successfully")
         } else {
             setStatusMessage("Post update failed")
@@ -151,12 +151,12 @@ export default function PostDetail() {
                     <p>Author: email: {post.post.author.username}, id:{post.post.author._id}</p>
                     <p>Posted: {post.post.date}</p>
                     <p>Published: {JSON.stringify(post.post.published)}</p>
-                <button type="submit" onClick={updatePost}>Update Post</button>
+                <button type="submit">Update Post</button>
+                {statusMessage}
                 </form>
 
                 {!post.post.published && <button onClick={handlePublish}>Publish</button>}
                 {post.post.published && <button onClick={handleUnpublish}>Unpublish</button>}
-                {statusMessage}
                 {post.post.comments.map(comment => (
                     <div key={comment._id}>
                         <p>{comment.content}</p>

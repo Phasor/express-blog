@@ -37,7 +37,7 @@ export default function Post({post, isLoggedIn, setPosts}) {
     <div>
         <h1>{post.title}</h1>
         <p>{post.content}</p>
-        <p>`Author: email: {post.author.username}, id:{post.author._id}`</p>
+        <p>Author: email: {post.author.username}, id:{post.author._id}</p>
         <p>Posted: {post.date}</p>
         <p>Published: {JSON.stringify(post.published)}</p>
         {isLoggedIn && <button onClick={deletePost}>Delete Post</button>}
