@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 
 export default function Post({setPosts, post, isLoggedIn, username, refreshHome}) {
-    const [comment, setComment] = useState(null);
+    const [comment, setComment] = useState("");
 
     const postComment = async (e) => {
         try{
@@ -54,7 +54,7 @@ export default function Post({setPosts, post, isLoggedIn, username, refreshHome}
             </div>
         ))}
         {isLoggedIn && 
-            <form onSumbit={postComment}>   
+            <form onSubmit={postComment}>   
                 <input type="text" placeholder="Leave comment..." value={comment} onChange={(e) => setComment(e.target.value)}/>
                 <button type="submit" onClick={postComment}>Post Comment</button>
             </form>

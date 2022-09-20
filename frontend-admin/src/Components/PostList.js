@@ -14,7 +14,7 @@ export default function PostList({ isLoggedIn }) {
                     'Authorization': localStorage.getItem('token')
                 }})
                 const jsonData = await response.json()
-                setPosts(jsonData)
+                setPosts(jsonData)  
             }
             getPosts()
         } catch(err) {

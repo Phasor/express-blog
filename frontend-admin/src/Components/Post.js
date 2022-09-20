@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-export default function Post({post, isLoggedIn, setPosts}) {
+export default function Post({ isLoggedIn, setPosts, post }) {
     const[error, setError] = useState(null)
+    
 
     const deletePost = async (id) => {
         try {       
@@ -16,11 +17,11 @@ export default function Post({post, isLoggedIn, setPosts}) {
                 })
                 const responseJson = await response.json()
                 console.log(responseJson)
-                if(responseJson.success === false) {
+                if(response.ok === false) {
                     setError(responseJson.message)
                 }
                 // fetch and set updated posts from the backend
-                if(responseJson.success === true) {
+                if(response.ok === true) {
                     const updatedPosts = await fetch('http://localhost:3000/post',
                     {method: 'GET'})
                     const jsonData = await updatedPosts.json()
@@ -34,11 +35,11 @@ export default function Post({post, isLoggedIn, setPosts}) {
    
 
   return (
-    <div>
-        <h1>{post.title}</h1>
+    <div>Test
+         <h1>{post.title}</h1>
         <p>{post.content}</p>
-        <p>Author: email: {post.author.username}, id:{post.author._id}</p>
         <p>Posted: {post.date}</p>
+        <p>Author: {post.author.username}, {post.author._id}</p>
         <p>Published: {JSON.stringify(post.published)}</p>
         {isLoggedIn && <button onClick={deletePost}>Delete Post</button>}
         {isLoggedIn && <Link to={`/post/${post._id}`}><button>Edit Post</button></Link>}
@@ -53,7 +54,7 @@ export default function Post({post, isLoggedIn, setPosts}) {
                 <p>------------------------</p>
             </div>
         ))}
-        {error && <p>{error}</p>}
+        {error && <p>{error}</p>} 
     </div>
   )
 }

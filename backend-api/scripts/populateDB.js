@@ -3,7 +3,7 @@ const csv = require('fast-csv'); // parses CSV files
 const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
-require('dotenv').config();
+require('dotenv').config({ path: '../.env' });
 
 const main = async () => {
 
