@@ -63,73 +63,68 @@ exports.user_create_post = [
     }
 ]
 
-exports.user_delete = (req, res, next) => {
-    // if Admin, delete user's posts
+exports.user_delete =  (req, res, next) => {
+    // if Admin, delete user's posts and all comments on them
     // delete comments from comments collection
     // delete user from users collection
     // delete comments made by the user on other posts
+    const userID = req.params.id;
 
     // if user is Admin delete their posts and related comments
-    User.findById(req.params.id, (err, user) => {
-        if (err) {
-            return res.json(err);
-        }
-        if( user.admin === true ){
-            // delete all comments on all their posts in Comments collection
-            Post.find({author: user._id}, (err, post) => {
+    User.findById(userID, (err, user) => {
+    if (err) {
+        return res.json(err);
+    }
+    if( user.admin === true ){
+        // delete all comments on all their posts in Comments collection
+        Post.find({author: userID},  (err, post) => {
                 if (err) {
                     return res.json(err);
                 }
-                post.forEach((post) => {
-                    post.comments.forEach((comment) => {
-                        Comment.findByIdAndRemove({_id:comment._id}, (err, comment) => {
-                            if (err) {
-                                return res.json(err);
-                            }
-                        });
+                post.forEach( (post) => {
+                    Comment.deleteMany({post: post._id}, (err) => {
+                        if (err) {
+                            return res.json(err);
+                        }
                     });
                 });
+                console.log("deleted all comments on user's posts");
             });
-            // delete all their posts
-            Post.deleteMany({author: user._id}, (err, post) => {
-                if (err) {
-                    return res.json(err);
-                }
-            })
-        }
-    })
+        };
+    });
+
+    // delete all their posts
+    Post.deleteMany({author: userID}, (err, post) => {
+            if (err) {
+                return res.json(err);
+            }
+            console.log(`Deleted all posts by user ${userID}`);
+        })
     
+        
     // delete users comments in Comments collection
-    Comment.deleteMany({author: req.params.id}, (err, comment) => {
+    Comment.deleteMany({author: userID }, (err, comment) => {
         if (err) {
             return res.json(err);
             console.log("error deleting comments");
         }
+        console.log(`Deleted all comments by user ${userID} in Comments colletion`);
     });
 
     // delete user in Users collection
-    User.findByIdAndRemove(req.params.id, (err, user) => {
+    User.findByIdAndRemove(userID, (err, user) => {
         if (err) {
             return res.json(err);
         }
+        console.log(`Deleted user ${userID} in Users collection`);
     });
 
-    // delete user comments in Post collection
-    Post.find({"comments.author": req.params.id}, (err, post) => {
+    // delete user comments in Post collection (comments the user made on other peoples posts)
+    Post.updateMany({"comments.author" : userID}, {$pull: {"comments": {author: userID}}}, (err, post) => {
         if (err) {
             return res.json(err);
         }
-        post.comments.forEach(comment => {
-            if(comment.author === req.params.id){
-                post.comments.id(comment._id).remove();
-            }
-        });
-        post.save((err, post) => {
-            if (err) {
-                return res.json(err);
-            }
-            return res.json({success: true, msg: 'User comments deleted'});
-        });  
+        console.log(`Deleted their comments on other users posts`);
     });
 }
     
