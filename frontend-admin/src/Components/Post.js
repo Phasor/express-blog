@@ -35,7 +35,7 @@ export default function Post({ isLoggedIn, setPosts, post }) {
    
 
   return (
-    <div>Test
+    <div>
          <h1>{post.title}</h1>
         <p>{post.content}</p>
         <p>Posted: {post.date}</p>

@@ -52,24 +52,25 @@ export default function UserDetail() {
                 'Authorization': localStorage.getItem('token')
             }})
             console.log("Deleted comment")
-            //setComments(comments.filter(comment => comment._id !== commentId))
-
-            // // fetch updated list of comments
-            // const getUpdatedComments = async () => {
-            //     const response = await fetch(`http://localhost:3000/comment/${userID}`,
-            //     {method: 'GET',
-            //     headers: {
-            //         'Authorization': localStorage.getItem('token')
-            //     }})
-            //     const jsonData = await response.json()
-            //     console.log(jsonData)
-            //     setComments(jsonData)
-            // }
-            // getUpdatedComments()
+            setComments(comments.filter(comment => comment._id !== commentId))
         } catch(err) {
             console.error(err.message)
         }
     }
+
+    const deleteUser = async () => {
+        try{
+            await fetch(`http://localhost:3000/user/${userID}`,
+            {method: 'DELETE',
+            headers: {
+                'Authorization': localStorage.getItem('token')
+            }})
+            console.log("Deleted user")
+            window.location = "/"
+        } catch(err) {
+            console.error(err.message)
+        }
+    }   
 
   return (
     <>
@@ -80,13 +81,14 @@ export default function UserDetail() {
                 <p>{user.user.username}</p>
                 <p>ID: {user.user._id}</p>
                 <p>Admin: {JSON.stringify(user.user.admin)}</p>
+                <button onClick={deleteUser}>Delete User</button>
                 <p>Comments:</p>
                 {comments.comments.map(comment => (
                     <div key={comment._id}>
                         <p>{comment.content}</p>
                         <p>Post ID: {comment.post}</p>
                         <p>Comment ID: {comment._id}</p>
-                        <button onClick={() => deleteComment(comment._id)}>Delete</button>
+                        <button onClick={() => deleteComment(comment._id)}>Delete Comment</button>
                         <p>------------------------</p>
                     </div>
                 ))}

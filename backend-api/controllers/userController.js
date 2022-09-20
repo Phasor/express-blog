@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const Post = require('../models/post');
+const Comment = require('../models/comment');
 const {body, validationResult} = require('express-validator');
 const utils = require('../lib/utils');
 const mongoose = require('mongoose');
@@ -62,13 +64,75 @@ exports.user_create_post = [
 ]
 
 exports.user_delete = (req, res, next) => {
-    User.findByIdAndRemove(req.params.id, (err, user) => {
-        if (err) { 
-            return res.json(err); 
+    // if Admin, delete user's posts
+    // delete comments from comments collection
+    // delete user from users collection
+    // delete comments made by the user on other posts
+
+    // if user is Admin delete their posts and related comments
+    User.findById(req.params.id, (err, user) => {
+        if (err) {
+            return res.json(err);
         }
-        res.json({message: "Deleted this user", user: user});
+        if( user.admin === true ){
+            // delete all comments on all their posts in Comments collection
+            Post.find({author: user._id}, (err, post) => {
+                if (err) {
+                    return res.json(err);
+                }
+                post.forEach((post) => {
+                    post.comments.forEach((comment) => {
+                        Comment.findByIdAndRemove({_id:comment._id}, (err, comment) => {
+                            if (err) {
+                                return res.json(err);
+                            }
+                        });
+                    });
+                });
+            });
+            // delete all their posts
+            Post.deleteMany({author: user._id}, (err, post) => {
+                if (err) {
+                    return res.json(err);
+                }
+            })
+        }
+    })
+    
+    // delete users comments in Comments collection
+    Comment.deleteMany({author: req.params.id}, (err, comment) => {
+        if (err) {
+            return res.json(err);
+            console.log("error deleting comments");
+        }
+    });
+
+    // delete user in Users collection
+    User.findByIdAndRemove(req.params.id, (err, user) => {
+        if (err) {
+            return res.json(err);
+        }
+    });
+
+    // delete user comments in Post collection
+    Post.find({"comments.author": req.params.id}, (err, post) => {
+        if (err) {
+            return res.json(err);
+        }
+        post.comments.forEach(comment => {
+            if(comment.author === req.params.id){
+                post.comments.id(comment._id).remove();
+            }
+        });
+        post.save((err, post) => {
+            if (err) {
+                return res.json(err);
+            }
+            return res.json({success: true, msg: 'User comments deleted'});
+        });  
     });
 }
+    
 
 exports.user_update = [
     // assume all fields are passed in. Will pull in old User that can be edited in WYSIWYG editor
