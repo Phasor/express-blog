@@ -13,7 +13,7 @@ Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MzFjZWEzY
 
 ###
 // get post by id
-GET http://localhost:3000/post/632ab208dc7ac4f51e7b2ab6
+GET http://localhost:3000/post/632ab208dc7ac4f51e7b2aad
 content-type: application/json
 
 ###

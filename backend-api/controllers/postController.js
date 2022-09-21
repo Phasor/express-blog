@@ -33,6 +33,7 @@ exports.post_get_single = (req, res, next) => {
     var postID = new mongoose.Types.ObjectId(req.params.id);
     Post.findById(postID)
     .populate('author')
+    .populate('comments.author')
     .exec((err, post) => {
         if (err) {
             return res.json(err);

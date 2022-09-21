@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../components/Header';
 import {useParams } from 'react-router-dom';
+import formatDate from '../utils/formatDate';
 
 export default function PostDetail() {
     const id = useParams().id;
@@ -21,12 +22,6 @@ export default function PostDetail() {
         getPost();
     },[id])
 
-    const formatDate = (dateString) => {
-        const date = new Date(dateString);
-        const formattedDate = date.toLocaleDateString("en-US",{ year: 'numeric', month: 'long', day: 'numeric' })
-        return formattedDate
-    } 
-
     return (
         <>
             <Header/>
@@ -42,7 +37,7 @@ export default function PostDetail() {
                         <div key={comment._id}>
                             <p>{comment.content}</p>
                             <p>{formatDate(comment.date)}</p>
-                            <p>Comment Author: {comment.author}</p>
+                            <p>Comment Author: {comment.author.username}</p>
                             <p>------------------------</p>
                         </div>
                     ))}

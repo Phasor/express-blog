@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
+import formatDate from '../utils/formatDate';
 
 export default function Post({setPosts, post, isLoggedIn, username, refreshHome}) {
     const [comment, setComment] = useState("");
@@ -44,13 +45,13 @@ export default function Post({setPosts, post, isLoggedIn, username, refreshHome}
         <h1>{post.title}</h1>
         <p>{post.content}</p>
         <p>Author: {post.author.username}</p>
-        <p>Posted: {post.date}</p>
+        <p>Posted: {formatDate(post.date)}</p>
         <Link to={`/${post._id}`}>Full Post</Link>
         {post.comments.length > 0 && <p>Comments</p>}
         {post.comments.map(comment => (
             <div key={comment._id}>
                 <p >{comment.content}</p>
-                <p >{comment.date}</p>
+                <p >{formatDate(comment.date)}</p>
                 <p>{comment.author}</p>
                 <p>-------------------</p>
             </div>
