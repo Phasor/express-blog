@@ -10,6 +10,7 @@ import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';
 import Signup from './pages/Signup';
+import PostDetail from './pages/PostDetail';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/logout" element={<Logout/>}/>
                 <Route exact path="/signup" element={<Signup/>}/>
+                <Route path="/:id" element={<PostDetail/>}/>
                 <Route path="/" element={<Home/>}/>
                 {/* No match route */}
                 <Route path="*" element={<Navigate to="/" replace />}/>

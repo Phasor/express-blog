@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 
 export default function Post({setPosts, post, isLoggedIn, username, refreshHome}) {
     const [comment, setComment] = useState("");
@@ -44,7 +45,8 @@ export default function Post({setPosts, post, isLoggedIn, username, refreshHome}
         <p>{post.content}</p>
         <p>Author: {post.author.username}</p>
         <p>Posted: {post.date}</p>
-        <p>Comments:</p>
+        <Link to={`/${post._id}`}>Full Post</Link>
+        {post.comments.length > 0 && <p>Comments</p>}
         {post.comments.map(comment => (
             <div key={comment._id}>
                 <p >{comment.content}</p>

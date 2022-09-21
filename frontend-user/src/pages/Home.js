@@ -29,7 +29,7 @@ export default function Home() {
     <>
         <div>
             <Header isLoggedIn={isLoggedIn}/>   
-            {isLoggedIn ? <h1>Welcome {username}</h1> : <h1>Welcome</h1>}
+            {isLoggedIn ? <h1>Welcome {username}</h1> : <h2>Sign in to leave comments...</h2>}
             <PostList 
                 isLoggedIn={isLoggedIn} 
                 username={username} 
