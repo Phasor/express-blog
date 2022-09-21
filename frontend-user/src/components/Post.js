@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
+import truncatePost from '../utils/truncatePost';
 
 export default function Post({setPosts, post, isLoggedIn, username, refreshHome}) {
     const [comment, setComment] = useState("");
@@ -43,7 +44,7 @@ export default function Post({setPosts, post, isLoggedIn, username, refreshHome}
   return (
     <div>
         <h1>{post.title}</h1>
-        <p>{post.content}</p>
+        <p>{truncatePost(post.content,200)}</p>
         <p>Author: {post.author.username}</p>
         <p>Posted: {formatDate(post.date)}</p>
         <Link to={`/${post._id}`}>Full Post</Link>
@@ -52,7 +53,7 @@ export default function Post({setPosts, post, isLoggedIn, username, refreshHome}
             <div key={comment._id}>
                 <p >{comment.content}</p>
                 <p >{formatDate(comment.date)}</p>
-                <p>{comment.author}</p>
+                <p>Author: {comment.author.username}</p>
                 <p>-------------------</p>
             </div>
         ))}

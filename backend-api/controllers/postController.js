@@ -8,6 +8,7 @@ exports.post_get = (req, res, next) => {
     Post.find({'published': true})
     .sort([['date', 'descending']])
     .populate('author')
+    .populate('comments.author')
     .exec((err, posts) => {
         if (err) { 
             return res.json(err); 
@@ -21,6 +22,7 @@ exports.post_get_admin = (req, res, next) => {
     Post.find()
     .sort([['date', 'descending']])
     .populate('author')
+    .populate('comments.author')
     .exec((err, posts) => {
         if (err) { 
             return res.json(err); 
