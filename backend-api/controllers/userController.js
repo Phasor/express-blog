@@ -75,33 +75,31 @@ exports.user_delete =  (req, res, next) => {
     if (err) {
         return res.json(err);
     }
-    if( user.admin === true ){
-        // delete all comments on all their posts in Comments collection
-        Post.find({author: userID},  (err, post) => {
+        if( user.admin === true ){ //they are an ADmin, they may have written posts
+            // delete all comments in Comments collection on posts written by the user to delete
+            // find posts written by user to delete
+            console.log(`Admin is ${user.admin}`);
+            Post.find({author: userID}, (err, doc) => {
                 if (err) {
                     return res.json(err);
                 }
-                post.forEach( (post) => {
+                // delete all comments on posts written by user to delete
+                console.log(`doc is ${doc}`);
+                console.log(`userID is ${userID}`);
+                console.log("Posts found...")
+                doc.forEach((post) => {
+                    console.log(`Inside forEach, this post is: ${post}`);
                     Comment.deleteMany({post: post._id}, (err) => {
                         if (err) {
                             return res.json(err);
                         }
+                        console.log(`Deleted all comments on post ${post._id}`);
                     });
                 });
-                console.log("deleted all comments on user's posts");
             });
-        };
-    });
+        }
+    })
 
-    // delete all their posts
-    Post.deleteMany({author: userID}, (err, post) => {
-            if (err) {
-                return res.json(err);
-            }
-            console.log(`Deleted all posts by user ${userID}`);
-        })
-    
-        
     // delete users comments in Comments collection
     Comment.deleteMany({author: userID }, (err, comment) => {
         if (err) {
@@ -111,13 +109,15 @@ exports.user_delete =  (req, res, next) => {
         console.log(`Deleted all comments by user ${userID} in Comments colletion`);
     });
 
-    // delete user in Users collection
-    User.findByIdAndRemove(userID, (err, user) => {
-        if (err) {
-            return res.json(err);
-        }
-        console.log(`Deleted user ${userID} in Users collection`);
-    });
+
+    // delete all their posts
+    Post.deleteMany({author: userID}, (err, post) => {
+            if (err) {
+                return res.json(err);
+            }
+            console.log(`Deleted all posts by user ${userID}`);
+    })
+    
 
     // delete user comments in Post collection (comments the user made on other peoples posts)
     Post.updateMany({"comments.author" : userID}, {$pull: {"comments": {author: userID}}}, (err, post) => {
@@ -125,6 +125,15 @@ exports.user_delete =  (req, res, next) => {
             return res.json(err);
         }
         console.log(`Deleted their comments on other users posts`);
+    });
+
+
+    // delete user in Users collection
+    User.findByIdAndRemove(userID, (err, user) => {
+        if (err) {
+            return res.json(err);
+        }
+        console.log(`Deleted user ${userID} in Users collection`);
     });
 }
     
