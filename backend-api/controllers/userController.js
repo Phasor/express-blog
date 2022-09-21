@@ -65,76 +65,71 @@ exports.user_create_post = [
 
 exports.user_delete =  (req, res, next) => {
     // if Admin, delete user's posts and all comments on them
-    // delete comments from comments collection
-    // delete user from users collection
-    // delete comments made by the user on other posts
+    // delete users comments from Comments collection
+    // delete user from Users collection
+    // delete comments made by the user on others' Posts in Posts collection
+
     const userID = req.params.id;
 
-    // if user is Admin delete their posts and related comments
-    User.findById(userID, (err, user) => {
-    if (err) {
-        return res.json(err);
-    }
-        if( user.admin === true ){ //they are an ADmin, they may have written posts
-            // delete all comments in Comments collection on posts written by the user to delete
-            // find posts written by user to delete
-            console.log(`Admin is ${user.admin}`);
-            Post.find({author: userID}, (err, doc) => {
-                if (err) {
-                    return res.json(err);
-                }
-                // delete all comments on posts written by user to delete
-                console.log(`doc is ${doc}`);
-                console.log(`userID is ${userID}`);
-                console.log("Posts found...")
-                doc.forEach((post) => {
-                    console.log(`Inside forEach, this post is: ${post}`);
-                    Comment.deleteMany({post: post._id}, (err) => {
-                        if (err) {
-                            return res.json(err);
-                        }
-                        console.log(`Deleted all comments on post ${post._id}`);
+    const deleteUserPostsIfAdmin = async () => {
+        try{
+                const user = await User.findById(userID);
+                if (user.admin) {
+                    // find posts they have written
+                    const userPosts = await Post.find({author: userID});
+                    userPosts.forEach(async (post) => {
+                        // delete comments on each post
+                        console.log(`Inside forEach, this post is: ${post}`);
+                        await Comment.deleteMany({post: post._id});
+                        // delete post
+                        await Post.findByIdAndDelete(post._id);
                     });
-                });
-            });
-        }
-    })
-
-    // delete users comments in Comments collection
-    Comment.deleteMany({author: userID }, (err, comment) => {
-        if (err) {
-            return res.json(err);
-            console.log("error deleting comments");
-        }
-        console.log(`Deleted all comments by user ${userID} in Comments colletion`);
-    });
-
-
-    // delete all their posts
-    Post.deleteMany({author: userID}, (err, post) => {
-            if (err) {
-                return res.json(err);
+                }
+            } catch (err) {
+                console.log(err);
             }
-            console.log(`Deleted all posts by user ${userID}`);
-    })
+    }
+
+    const deleteUsersComments = async () => {
+        try {
+            await Comment.deleteMany({author: userID});
+            console.log(`Deleted all comments by user ${userID} in Comments colletion`);
+        } catch (err) {
+            console.log(err);
+            console.log("error deleting users comments in Comments");
+        }
+    }
     
-
-    // delete user comments in Post collection (comments the user made on other peoples posts)
-    Post.updateMany({"comments.author" : userID}, {$pull: {"comments": {author: userID}}}, (err, post) => {
-        if (err) {
-            return res.json(err);
+    const deleteUserCommentsInOtherPosts = async () => {
+        try {
+            await Post.updateMany({"comments.author" : userID}, {$pull: {"comments": {author: userID}}});
+            console.log(`Deleted their comments on other users posts`);
+        } catch (err) {
+            console.log(err);
+            console.log("error deleting users comments in other peoples Posts");
         }
-        console.log(`Deleted their comments on other users posts`);
-    });
+    }
 
-
-    // delete user in Users collection
-    User.findByIdAndRemove(userID, (err, user) => {
-        if (err) {
-            return res.json(err);
+    const deleteUser = async () => {
+        try{
+            await User.findByIdAndDelete(userID);
+            console.log(`Deleted user ${userID}`);
+        } catch (err) {
+            console.log(err);
+            console.log("error deleting user");
         }
-        console.log(`Deleted user ${userID} in Users collection`);
-    });
+    }
+
+    try {
+        deleteUserPostsIfAdmin();
+        deleteUsersComments();
+        deleteUserCommentsInOtherPosts();
+        deleteUser();
+        res.json({success: true, msg: `Ran all functions to delete user ${userID}`});
+    } catch (err) {
+        console.log(err);
+        res.json({success: false, msg: `Failed to run all functions when deleting user ${userID}`});
+    }
 }
     
 
