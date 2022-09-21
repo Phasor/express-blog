@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom';
 import Header from '../components/Header'
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -27,7 +28,6 @@ export default function Login() {
                 }
             );
             const userJson = await response.json();
-            console.log(`User: ${userJson}`);
             
             if(userJson.success === true){ // login successful
                 // set the JWT in local storage
@@ -36,7 +36,10 @@ export default function Login() {
                 localStorage.setItem('userId', userJson.user._id);
 
                 // redirect to home page
-                navigate('/');
+                setTimeout(() => {
+                    navigate('/')
+                }, 1000);
+                toast.success('Login successful');
             } else {
                 setErrors(userJson.errors);
                 setMessage(userJson.message);
@@ -47,9 +50,11 @@ export default function Login() {
         }
     }
 
+
   return (
     <div>
-        <Header/>
+        <Header />
+        <Toaster />
         <h1>Log In</h1>
         <form onSubmit={LoginUser}>
             <label htmlFor="username">Email</label>

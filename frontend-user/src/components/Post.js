@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
 import truncatePost from '../utils/truncatePost';
 
-export default function Post({setPosts, post, isLoggedIn, username, refreshHome}) {
+export default function Post({setPosts, post, isLoggedIn}) {
     const [comment, setComment] = useState("");
 
     const postComment = async (e) => {

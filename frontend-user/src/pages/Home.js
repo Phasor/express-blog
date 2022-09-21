@@ -13,7 +13,7 @@ export default function Home() {
     }
 
 
-  useEffect(() => {
+  useEffect(() => {    
     const getUsername = async () => {
         if(localStorage.getItem('token')){
             setUsername(localStorage.getItem('username'))
@@ -22,6 +22,7 @@ export default function Home() {
     }
     getUsername()
     .catch(err => console.log(err));
+    console.log("use Effect ran")
     }, [])
 
 
@@ -29,6 +30,7 @@ export default function Home() {
     <>
         <div>
             <Header isLoggedIn={isLoggedIn}/>   
+            <Toaster />
             {isLoggedIn ? <h1>Welcome {username}</h1> : <h2>Sign in to leave comments...</h2>}
             <PostList 
                 isLoggedIn={isLoggedIn} 
