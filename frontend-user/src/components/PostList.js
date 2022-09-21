@@ -26,8 +26,7 @@ return(
                     key={post._id} 
                     post={post} 
                     isLoggedIn={props.isLoggedIn} 
-                    username={props.username}
-                    refreshHome={props.refreshHome}
+                   
                     setPosts={setPosts}
                 />
             ))

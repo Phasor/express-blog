@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Header from '../components/Header';
 import {useParams } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
+import { Link } from 'react-router-dom';
 
 export default function PostDetail() {
     const id = useParams().id;
@@ -26,9 +27,9 @@ export default function PostDetail() {
         <>
             <Header/>
             {showPost &&
-                <>
-                    <h1>Post Detail</h1>
-                    <p>{post.post.title}</p>
+                <>  
+                    <Link to="/">Back</Link>
+                    <h1>{post.post.title}</h1>
                     <p>Author: {post.post.author.username}</p>
                     <p>Posted: {formatDate(post.post.date)}</p>
                     <p>{post.post.content}</p>
