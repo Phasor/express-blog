@@ -16,7 +16,7 @@ import PostDetail from './pages/PostDetail';
 function App() {
   return (
     <Router>
-        <div>
+        <div className='w-screen'>
             <Routes>
                 <Route exact path="/login" element={<Login/>}/>
                 <Route exact path="/logout" element={<Logout/>}/>
