@@ -24,8 +24,8 @@ export default function PostList({isLoggedIn, username}) {
         return <div>Loading...</div>
     } else {
         return(
-            <div className='w-full relative top-[90px]'>
-                {isLoggedIn ? <h1>Welcome {username}</h1> : <h2>Sign in to leave comments...</h2>}
+            <div className='max-w-[1000px] relative top-[90px]'>
+                {isLoggedIn ? <h1 className='my-2'>Welcome {username}</h1> : <h2 className='my-2'>Sign in to leave comments...</h2>}
                 {
                     posts.map(post => (
                         <Post 

@@ -43,7 +43,7 @@ export default function Post({setPosts, post, isLoggedIn}) {
 
   return (
     <div>
-        <h1>{post.title}</h1>
+        <h1 className='text-3xl'>{post.title}</h1>
         <p>{truncatePost(post.content,200)}</p>
         <p>Author: {post.author.username}</p>
         <p>Posted: {formatDate(post.date)}</p>

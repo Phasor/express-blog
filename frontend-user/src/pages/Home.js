@@ -28,12 +28,14 @@ export default function Home() {
   return (
     <>
         <div>
-            <Header isLoggedIn={isLoggedIn}/>   
-            <PostList 
-                isLoggedIn={isLoggedIn} 
-                username={username} 
-                refreshHome={refreshHome}
-            />
+            <Header isLoggedIn={isLoggedIn}/> 
+            <div className="flex justify-center p-4"> 
+                <PostList 
+                    isLoggedIn={isLoggedIn} 
+                    username={username} 
+                    refreshHome={refreshHome}
+                />
+            </div> 
             <Footer/>
         </div>
     </>
