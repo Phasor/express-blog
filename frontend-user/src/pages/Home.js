@@ -28,7 +28,7 @@ export default function Home() {
   return (
     <div className='w-screen font-robotoMono text-lg'>       
         <Header isLoggedIn={isLoggedIn}/> 
-        <div className="flex justify-center p-4"> 
+        <div className="flex justify-center p-4 w-full"> 
             <PostList 
                 isLoggedIn={isLoggedIn} 
                 username={username} 
