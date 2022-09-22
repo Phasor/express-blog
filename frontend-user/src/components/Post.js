@@ -42,19 +42,18 @@ export default function Post({setPosts, post, isLoggedIn}) {
 
 
   return (
-    <div>
-        <h1 className='text-4xl font-bold'>{post.title}</h1>
-        <p>{truncatePost(post.content,200)}</p>
-        <p>Author: {post.author.username}</p>
-        <p>Posted: {formatDate(post.date)}</p>
-        <Link to={`/${post._id}`}>Full Post</Link>
-        {post.comments.length > 0 && <p>Comments</p>}
+    <div className='border-b'>
+        <h1 className='text-4xl font-bold my-8'>{post.title}</h1>
+        <p className='mb-3'>{truncatePost(post.content,200)}</p>
+        <Link to={`/${post._id}`} className="underline text-blue-600">Full Post</Link>
+        <p className='mt-4'><span className='font-bold'>Post Author:</span> {post.author.username}</p>
+        <p className='mb-4'>{formatDate(post.date)}</p>
+        {post.comments.length > 0 && <p className='font-bold underline'>Comments</p>}
         {post.comments.map(comment => (
-            <div key={comment._id}>
-                <p >{comment.content}</p>
+            <div key={comment._id} className="mb-8">
+                <p className='italic'>{comment.content}</p>
                 <p >{formatDate(comment.date)}</p>
-                <p>Author: {comment.author.username}</p>
-                <p>-------------------</p>
+                <p>Comment Author: {comment.author.username}</p>
             </div>
         ))}
         {isLoggedIn && 
@@ -63,7 +62,7 @@ export default function Post({setPosts, post, isLoggedIn}) {
                 <button type="submit" onClick={postComment}>Post Comment</button>
             </form>
         }    
-        <p>---------------------------------------------------------------------------------------</p>
+        
     </div>
   )
 }
