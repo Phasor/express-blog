@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import PostList from '../components/PostList';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import Sidebar from '../components/Sidebar';
 
 export default function Home() {
   const [username, setUsername] = useState('');
@@ -38,12 +39,10 @@ export default function Home() {
                                 refreshHome={refreshHome}
                             />
                         </div>
-                        <div className='col-start-10 col-end-13 bg-blue-300 h-full '>
-                            <p>CTA</p>    
-                        </div>
+                       <Sidebar/>
                     </div>
                 </div>
-        </div>   
+            </div>   
         <Footer/> 
     </div>
   )
