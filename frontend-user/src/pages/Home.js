@@ -30,15 +30,15 @@ export default function Home() {
         <Header isLoggedIn={isLoggedIn}/>
             <div className='flex justify-center'> 
                 <div className='max-w-[1500px]' >
-                    <div className="grid grid-cols-10 gap-16 p-8 w-full">
-                        <div className='col-start-1 col-end-8'>
+                    <div className="grid grid-cols-12 gap-16 p-8 w-full mt-20">
+                        <div className='col-start-1 col-end-10'>
                             <PostList 
                                 isLoggedIn={isLoggedIn} 
                                 username={username} 
                                 refreshHome={refreshHome}
                             />
                         </div>
-                        <div className='col-start-8 col-end-11 bg-blue-300 h-full '>
+                        <div className='col-start-10 col-end-13 bg-blue-300 h-full '>
                             <p>CTA</p>    
                         </div>
                     </div>
