@@ -52,8 +52,8 @@ export default function Post({setPosts, post, isLoggedIn}) {
         {post.comments.map(comment => (
             <div key={comment._id} className="mb-8">
                 <p className='italic'>{comment.content}</p>
-                <p >{formatDate(comment.date)}</p>
-                <p>Comment Author: {comment.author.username}</p>
+                <p className='text-sm'>{formatDate(comment.date)}</p>
+                <p className='text-sm'>Comment Author: {comment.author.username}</p>
             </div>
         ))}
         {isLoggedIn && 

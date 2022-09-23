@@ -28,22 +28,24 @@ export default function PostDetail() {
         <div className='h-screen'>
             <Header/>
             {showPost &&
-                <>  
-                    <Link to="/">Back</Link>
-                    <h1>{post.post.title}</h1>
-                    <p>Author: {post.post.author.username}</p>
-                    <p>Posted: {formatDate(post.post.date)}</p>
-                    <p>{post.post.content}</p>
-                    <p>Comments</p>
-                    {post.post.comments.map(comment => (
-                        <div key={comment._id}>
-                            <p>{comment.content}</p>
-                            <p>{formatDate(comment.date)}</p>
-                            <p>Comment Author: {comment.author.username}</p>
-                            <p>------------------------</p>
-                        </div>
-                    ))}
-                </>
+                <div className='flex justify-center font-robotoMono text-lg'>
+                    <div className="max-w-[1000px] mt-[110px]">  
+                        <Link to="/" className='text-blue-500 text-lg'>{"<--"} Back</Link>
+                        <h1 className='text-4xl font-bold my-8'>{post.post.title}</h1>
+                        <p className='my-2'><span className='font-bold'>Post Author:</span> {post.post.author.username}</p>
+                        <p className='my-2'>{post.post.content}</p>
+                        <p className='my-2'>{formatDate(post.post.date)}</p>
+                        <p className='my-4 underline'><span className='font-bold'>Comments</span></p>
+                        {post.post.comments.map(comment => (
+                            <div key={comment._id}>
+                                <p className='italic'>{comment.content}</p>
+                                <p className='text-sm'>{formatDate(comment.date)}</p>
+                                <p className='text-sm'>Comment Author: {comment.author.username}</p>
+                                <p>------------------------</p>
+                            </div>
+                        ))}
+                    </div>
+                </div>
             }
             <Footer/>
         </div>
