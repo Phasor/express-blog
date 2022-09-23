@@ -1,7 +1,8 @@
 import React, {useState} from 'react'
 import {useNavigate} from 'react-router-dom';
-import Header from '../components/Header'
 import toast, { Toaster } from 'react-hot-toast';
+import Header from '../components/Header'
+import Footer from '../components/Footer'
 
 export default function Login() {
     const [username, setUsername] = useState('');
@@ -52,19 +53,24 @@ export default function Login() {
 
 
   return (
-    <div>
+    <div className='h-screen'>
         <Header />
         <Toaster />
-        <h1>Log In</h1>
-        <form onSubmit={LoginUser}>
-            <label htmlFor="username">Email</label>
-            <input type="text" placeholder="adam@gmail.com" value={username} onChange={(e) => {setUsername(e.target.value)}} name="username" id="username"/>
-            <label htmlFor="password">Password</label>
-            <input type="password" placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} name="password" id="password"/>
-            <input type="submit" value="Submit"/>
-        </form>
-        {errors && errors.map(error => <p>{error}</p>)}
-        {message && <p>{message}</p>}
+        <div className='flex justify-center font-robotoMono text-lg'>
+            <div className="max-w-[1000px] mt-[200px] border border-gray-200 rounded-lg">  
+                <h1 className='text-4xl font-bold mb-2 border-b border-gray-200 p-2'>Log In</h1>
+                <form onSubmit={LoginUser} className="">
+                    <label htmlFor="username" className='p-2'>Email</label>
+                    <input type="text" className='p-2 border border-gray-200 rounded-md' placeholder="adam@gmail.com" value={username} onChange={(e) => {setUsername(e.target.value)}} name="username" id="username"/>
+                    <label htmlFor="password" className='p-2'>Password</label>
+                    <input type="password"  className='p-2 border border-gray-200 rounded-md mb-2' placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} name="password" id="password"/>
+                    <button type="submit" value="Submit" className='p-2 bg-blue-500 text-white border rounded-lg mx-2'>Submit </button>
+                </form>
+                {errors && errors.map(error => <p>{error}</p>)}
+                {message && <p>{message}</p>}
+            </div>
+        </div>
+        <Footer />
     </div>
   )
 }
