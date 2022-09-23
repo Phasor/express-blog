@@ -25,7 +25,7 @@ export default function PostList({isLoggedIn, username}) {
     } else {
         return(
             <div className=''>
-                {isLoggedIn ? <h1 className='my-2'>Welcome {username}</h1> : <h1 className='my-2 font-bold text-center italic'>Sign in to leave comments...</h1>}
+                {isLoggedIn ? <h1 className='m-2'>Welcome {username}</h1> : <h1 className='my-2 font-bold text-center italic'>Sign in to leave comments...</h1>}
                 {
                     posts.map(post => (
                         <Post
