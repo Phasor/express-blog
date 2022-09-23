@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react'
-import Header from '../components/Header';
 import {useParams } from 'react-router-dom';
 import formatDate from '../utils/formatDate';
 import { Link } from 'react-router-dom';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
 export default function PostDetail() {
     const id = useParams().id;
@@ -24,7 +25,7 @@ export default function PostDetail() {
     },[id])
 
     return (
-        <>
+        <div className='h-screen'>
             <Header/>
             {showPost &&
                 <>  
@@ -44,6 +45,7 @@ export default function PostDetail() {
                     ))}
                 </>
             }
-        </>
+            <Footer/>
+        </div>
     )
 }
