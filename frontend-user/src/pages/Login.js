@@ -42,8 +42,8 @@ export default function Login() {
                 }, 1000);
                 toast.success('Login successful');
             } else {
-                setErrors(userJson.errors);
-                setMessage(userJson.message);
+                if(userJson.errors) setErrors(userJson.errors.msg);
+                if (userJson.message) setMessage(userJson.message);
             }
 
         } catch(err) {
@@ -66,10 +66,18 @@ export default function Login() {
                     <input type="password"  className='p-2 mx-2 border border-gray-200 rounded-md mb-2' placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} name="password" id="password"/>
                     <button type="submit" value="Submit" className='p-2 mb-2 bg-blue-600 hover:bg-blue-700 text-white border rounded-lg mx-2'>Submit </button>
                 </form>
-                {errors && errors.map(error => <p>{error}</p>)}
-                {message && <p>{message}</p>}
             </div>
         </div>
+                {errors && (
+                     <div className='flex justify-center'>
+                        <ul className='text-red-500 italic text-lg font-bold mt-5'>
+                            {errors.map((error, index) => {
+                                return <li key={index}>{error.msg}</li>
+                            })}
+                        </ul>
+                    </div>
+                )}
+                {message && <p className='text-red-500 italic mt-5 text-center text-lg font-bold'>{message}</p>}
         <Footer />
     </div>
   )

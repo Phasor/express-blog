@@ -8,6 +8,7 @@ export default function Signup() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
     const [errors, setErrors] = useState(null);
+    const [message, setMessage] = useState(null);
     const navigate = useNavigate();
 
 const handleSubmit = async (e) => {
@@ -31,11 +32,13 @@ const handleSubmit = async (e) => {
                 navigate('/')
             }, 2000);
             toast.success('Signup successful');
+        } else {
+            if(userJson.errors) setErrors(userJson.errors);
+            if(userJson.message) setMessage(userJson.message);
         }
 
     } catch (error) {
         console.log(error);
-        setErrors(error);
     }
 }
 
@@ -54,9 +57,18 @@ const handleSubmit = async (e) => {
                     <input type="password"  className='p-2 mx-2 border border-gray-200 rounded-md mb-2' placeholder="Password" value={password} onChange={(e) => {setPassword(e.target.value)}} name="password" id="password"/>
                     <button type="submit" value="Submit" className='p-2 mb-2 bg-blue-600 hover:bg-blue-700 text-white border rounded-lg mx-2'>Submit </button>
                 </form>
-                {errors && errors.map(error => <p>{error}</p>)}
             </div>
         </div>
+        {errors &&  (
+            <div className='flex justify-center'>
+                    <ul className='text-red-500 italic text-lg font-bold mt-5'>
+                        {errors.map((error, index) => {
+                            return <li key={index}>{error.msg}</li>
+                        })}
+                    </ul>
+            </div>
+        )}
+        {message && <p className='text-red-500 italic mt-5 text-center text-lg font-bold'>{message}</p>}
         <Footer />
     </div>
 
