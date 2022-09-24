@@ -48,6 +48,12 @@ export default function Post({setPosts, post, isLoggedIn}) {
         <Link to={`/${post._id}`} className="underline text-blue-600">Full Post</Link>
         <p className='mt-4'><span className='font-bold'>Post Author:</span> {post.author.username}</p>
         <p className='mb-4'>{formatDate(post.date)}</p>
+        {isLoggedIn && 
+            <form onSubmit={postComment} className="mb-10">   
+                <input type="text" placeholder="Leave comment..." className=" border border-gray-200 rounded-md w-[600px] p-1" value={comment} onChange={(e) => setComment(e.target.value)}/>
+                <button type="submit" className="bg-blue-600 hover:bg-blue-700 ml-4 rounded-md text-white py-1 px-2" onClick={postComment}>Post Comment</button>
+            </form>
+        }    
         {post.comments.length > 0 && <p className='font-bold underline'>Comments</p>}
         {post.comments.map(comment => (
             <div key={comment._id} className="mb-8">
@@ -56,13 +62,6 @@ export default function Post({setPosts, post, isLoggedIn}) {
                 <p className='text-sm'>Comment Author: {comment.author.username}</p>
             </div>
         ))}
-        {isLoggedIn && 
-            <form onSubmit={postComment} className="mb-10">   
-                <input type="text" placeholder="Leave comment..." className=" border border-gray-200 rounded-md w-[600px] p-1" value={comment} onChange={(e) => setComment(e.target.value)}/>
-                <button type="submit" className="bg-blue-600 hover:bg-blue-700 ml-4 rounded-md text-white py-1 px-2" onClick={postComment}>Post Comment</button>
-            </form>
-        }    
-        
     </div>
   )
 }
