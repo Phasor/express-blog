@@ -80,7 +80,7 @@ export default function PostDetail() {
             <Header isLoggedIn={isLoggedIn}/>
             {showPost &&
                 <div className='flex justify-center'>
-                    <div className="max-w-[1000px] mt-[110px]">  
+                    <div className=" p-4 pr-8 max-w-[1000px] mt-[110px]">  
                         <Link to="/" className='text-blue-500 text-lg'>{"<--"} Back</Link>
                         <h1 className='text-4xl font-bold my-8'>{post.post.title}</h1>
                         <p className='my-2'><span className='font-bold'>Post Author:</span> {post.post.author.username}</p>
@@ -88,7 +88,7 @@ export default function PostDetail() {
                         <p className='my-2'>{formatDate(post.post.date)}</p>
                         {isLoggedIn && 
                             <form onSubmit={postComment} className="my-6">   
-                                <input type="text" placeholder="Leave comment..." className=" border border-gray-200 rounded-md w-[600px] p-1" value={comment} onChange={(e) => setComment(e.target.value)}/>
+                                <input type="text" placeholder="Leave comment..." className=" border border-gray-200 rounded-md md:w-[600px] p-1" value={comment} onChange={(e) => setComment(e.target.value)}/>
                                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 ml-4 rounded-md text-white py-1 px-2" onClick={postComment}>Post Comment</button>
                             </form>
                          } 

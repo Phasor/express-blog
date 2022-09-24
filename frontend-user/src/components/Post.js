@@ -50,7 +50,7 @@ export default function Post({setPosts, post, isLoggedIn}) {
         <p className='mb-4'>{formatDate(post.date)}</p>
         {isLoggedIn && 
             <form onSubmit={postComment} className="mb-10">   
-                <input type="text" placeholder="Leave comment..." className=" border border-gray-200 rounded-md w-[600px] p-1" value={comment} onChange={(e) => setComment(e.target.value)}/>
+                <input type="text" placeholder="Leave comment..." className=" border border-gray-200 rounded-md md:w-[600px] p-1" value={comment} onChange={(e) => setComment(e.target.value)}/>
                 <button type="submit" className="bg-blue-600 hover:bg-blue-700 ml-4 rounded-md text-white py-1 px-2" onClick={postComment}>Post Comment</button>
             </form>
         }    
