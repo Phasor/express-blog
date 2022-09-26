@@ -38,9 +38,9 @@ export default function Login() {
         <div className='flex justify-center '>
             <form onSubmit={handleSubmit} className="flex flex-col w-1/4 border border-gray-700 rounded-lg p-4 mt-[200px]">
                 <label className='p-1' htmlFor="username">Email</label>
-                <input className='p-1 m-1 border-gray-600 rounded' type="text" name="username" id="username" />
+                <input className='p-1 m-1 border-gray-600 rounded text-black' type="text" name="username" id="username" placeholder='admin@gmail.com' />
                 <label className='p-1' htmlFor="password">Password</label>
-                <input className='p-1 m-1 border-gray-600 rounded' type="password" name="password" id="password" />
+                <input className='p-1 m-1 border-gray-600 rounded text-black' type="password" name="password" id="password" placeholder='Password'/>
                 <button type="submit" className='m-1 mt-4 bg-blue-700'>Login</button>
             </form>
         </div>

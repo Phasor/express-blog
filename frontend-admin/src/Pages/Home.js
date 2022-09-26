@@ -17,9 +17,11 @@ export default function Home() {
     }, [])
 
   return (
-    <div>
+    <div className='w-full'>
         <Header isLoggedIn={isLoggedIn}/>
-        <PostList isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
+        <div className='flex justify-center'>
+            <PostList isLoggedIn={isLoggedIn} isAdmin={isAdmin}/>
+        </div>
     </div>
   )
 }
