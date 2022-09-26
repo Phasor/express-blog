@@ -1,7 +1,10 @@
 {
   "name": "blog",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "private": true,
+  "author": "@Phas0r",
+  "description": "A blog REST API built with Express",
+  "license":"MIT",
   "scripts": {
     "start": "node ./bin/www",
     "devstart": "nodemon ./bin/www"
@@ -29,5 +32,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
+  },
+  "engines": {
+    "node": "18.7.0"
   }
 }
