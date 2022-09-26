@@ -60,7 +60,20 @@ export default function UserDetail() {
                 'Authorization': localStorage.getItem('token')
             }})
             console.log("Deleted comment")
-            setComments(comments.filter(comment => comment._id !== commentId))
+            // refresh comments
+            const getComments = async () => {
+    
+                const response = await fetch(`http://localhost:3000/comment/${userID}`,
+                {method: 'GET',
+                headers: {
+                    'Authorization': localStorage.getItem('token')
+                }})
+                const jsonData = await response.json()
+                console.log(jsonData)
+                setComments(jsonData)
+                setShowUser(true)
+            }
+            getComments()
         } catch(err) {
             console.error(err.message)
         }
