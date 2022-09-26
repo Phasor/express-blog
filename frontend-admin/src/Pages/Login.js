@@ -33,10 +33,10 @@ export default function Login() {
 
 
   return (
-    <div className='bg-[#1e1e2c] h-screen w-full'>
+    <div className='bg-[#1e1e2c] h-screen w-full text-[#fffff2]'>
         <Header/>
         <div className='flex justify-center '>
-            <form onSubmit={handleSubmit} className="flex flex-col w-1/4 border border-gray-700 rounded-lg p-4 mt-[200px]">
+            <form onSubmit={handleSubmit} className="flex flex-col w-1/4 border border-gray-700 rounded-lg p-4 mt-[200px] bg-gray-800 opacity-75">
                 <label className='p-1' htmlFor="username">Email</label>
                 <input className='p-1 m-1 border-gray-600 rounded text-black' type="text" name="username" id="username" placeholder='admin@gmail.com' />
                 <label className='p-1' htmlFor="password">Password</label>

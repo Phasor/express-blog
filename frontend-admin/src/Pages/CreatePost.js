@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import Header from '../Components/Header';
+import { Link } from 'react-router-dom';
 
 export default function CreatePost() {
     const[success, setSuccess] = useState(false);
@@ -46,6 +47,7 @@ export default function CreatePost() {
         <Header />
         <div className='flex justify-center min-h-screen'>   
             <div className='w-[50%] bg-white border rounded-lg my-10 p-6 shadow-lg'>
+                <Link to='/' className=' text-blue-500 hover:text-blue-700'>{"<--"}Back</Link>
                 <h2 className='text-2xl' >Create Post</h2>
                 <form onSubmit={handleSubmit} className="border border-gray-200 rounded-lg p-2 flex flex-col">
                     <label htmlFor="title" className="m-1"><span className='font-bold'>Title</span></label>
