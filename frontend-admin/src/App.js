@@ -12,6 +12,7 @@ import UserDetail from './Components/UserDetail';
 import CreatePost from "./Pages/CreatePost";
 import PostDetail from "./Components/PostDetail";
 import PrivateRoutes from "./Components/PrivateRoutes";
+import './index.css'
 
 function App() {
 

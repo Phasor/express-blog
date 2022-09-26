@@ -33,15 +33,17 @@ export default function Login() {
 
 
   return (
-    <>
+    <div className='bg-[#1e1e2c] text-white h-screen w-full'>
         <Header/>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="username">Email</label>
-            <input type="text" name="username" id="username" />
-            <label htmlFor="password">Password</label>
-            <input type="password" name="password" id="password" />
-            <button type="submit">Login</button>
-        </form>
-    </>
+        <div className='flex m-auto mt-[150px] border border-gray-800 rounded-lg p-10 '>
+            <form onSubmit={handleSubmit}>
+                <label className='p-3' htmlFor="username">Email</label>
+                <input className='p-3' type="text" name="username" id="username" />
+                <label className='p-3' htmlFor="password">Password</label>
+                <input className='p-3' type="password" name="password" id="password" />
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
   )
 }
