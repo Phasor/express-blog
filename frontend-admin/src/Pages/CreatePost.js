@@ -42,18 +42,23 @@ export default function CreatePost() {
 };
 
   return (
-    <div>
+    <div className='w-full'>
         <Header />
-        <h1>Create Post</h1>
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="title">Title</label>
-            <input type="text" placeholder="Title" name="title" />
-            <label htmlFor="content">Post Content</label>
-            <textarea placeholder="Body" name="content" />
-            <button type="submit">Submit</button>
-        </form>
-        {success && <p>Post created successfully!</p>}
-        {error && <p>{error}</p>}
+        <div className='flex justify-center min-h-screen'>   
+            <div className='w-[50%] bg-white border rounded-lg my-10 p-6 shadow-lg'>
+                <h2 className='text-2xl' >Create Post</h2>
+                <form onSubmit={handleSubmit} className="border border-gray-200 rounded-lg p-2 flex flex-col">
+                    <label htmlFor="title" className="m-1"><span className='font-bold'>Title</span></label>
+                    <input className='border border-gray-200 rounded-lg w-[50%] my-2 p-1' type="text" placeholder="Title" name="title" />
+                    <label htmlFor="content" className="m-1"><span className='font-bold'>Post Content</span></label>
+                    <textarea className='border border-gray-200 rounded-lg p-1' rows="10" placeholder="Post content..." name="content" />
+                    <p className='my-2 text-red-600 italic'>Posts must be staged and then published after to appear on the blog.</p>
+                    <button className='my-4 bg-blue-700 border rounded-md text-white' type="submit">Stage Post</button>
+                </form>
+                {success && <p>Post created successfully!</p>}
+                {error && <p>{error}</p>}
+            </div>
+        </div>
     </div>
   )
 }
