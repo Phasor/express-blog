@@ -24,8 +24,8 @@ export default function PostList({ isLoggedIn }) {
 
 
   return (
-    <div className='w-[50%] bg-white my-10 border rounded-xl p-6'>
-        <h2 className='text-3xl my-4'>Posts</h2>
+    <div className='w-[50%] bg-white my-10 border rounded-xl p-6 shadow-lg'>
+        <h2 className='text-3xl my-4'> All Posts</h2>
         {posts.map(post => (
             <Post key={post._id} post={post} isLoggedIn={isLoggedIn} setPosts={setPosts}/>
         ))}

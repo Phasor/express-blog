@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useParams, Link } from 'react-router-dom'
+import Header from './Header'
+import formatDate from '../utils/formatDate'
 
 export default function PostDetail() {
     const [post, setPost] = useState('')
@@ -137,39 +139,42 @@ export default function PostDetail() {
     
   
   return (
-    <>
+    <div className='w-full'>
+        <Header />
         {post && 
-            <div>
-                <Link to='/'><h1>Edit Post</h1></Link>
-                <p>Post ID: {post.post._id}</p>
-                <form onSubmit={updatePost}>
-                    <label htmlFor="title">Title</label>
-                    <input type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} name="title"/>
-                    <br></br>
-                    <label htmlFor="content">Post Content</label>
-                    <textarea value={postContent} onChange={(e) => setPostContent(e.target.value)} name="content" rows="10" cols="100"/>
-                    <p>Author: email: {post.post.author.username}, id:{post.post.author._id}</p>
-                    <p>Posted: {post.post.date}</p>
-                    <p>Published: {JSON.stringify(post.post.published)}</p>
-                <button type="submit">Update Post</button>
-                {statusMessage}
-                </form>
+            <div className='flex justify-center'>
+                <div className='w-[50%] bg-white border rounded-lg my-10 p-6 shadow-lg'>
+                    <Link to="/" className='text-blue-500 underline'>{"<--"} Back</Link>
+                    <Link to='/'><h2 className='text-2xl my-2'>Edit Post</h2></Link>
+                    <p><span className='font-bold'>Post ID: </span>{post.post._id}</p>
+                    <form onSubmit={updatePost} className="flex flex-col my-2">
+                        <label htmlFor="title" className='font-bold my-2'>Title</label>
+                        <input className='border border-gray-200 rounded-md w-[50%]' type="text" value={postTitle} onChange={(e) => setPostTitle(e.target.value)} name="title"/>
+                        <label htmlFor="content" className='font-bold my-2'>Post Content</label>
+                        <textarea className='mb-2 border border-gray-200 rounded-md' value={postContent} onChange={(e) => setPostContent(e.target.value)} name="content" rows="10" cols="100"/>
+                        <p><span className='font-bold'>Author:</span> email: {post.post.author.username}, id:{post.post.author._id}</p>
+                        <p><span className='font-bold'>Posted: </span> {formatDate(post.post.date)}</p>
+                        <p><span className='font-bold'>Published: </span> {JSON.stringify(post.post.published)}</p>
+                    <button className="my-2 bg-blue-700 text-white border rounded-md" type="submit">Update Post</button>
+                    {statusMessage}
+                    </form>
 
-                {!post.post.published && <button onClick={handlePublish}>Publish</button>}
-                {post.post.published && <button onClick={handleUnpublish}>Unpublish</button>}
-                {post.post.comments.map(comment => (
-                    <div key={comment._id}>
-                        <p>{comment.content}</p>
-                        <p>{comment.date}</p>
-                        <p>Comment Author: {comment.author}</p>
-                        <p>Comment ID: {comment._id}</p>
-                        <button onClick={() => deleteComment(comment._id)}>Delete Comment</button>
-                        <p>------------------------</p>
-                    </div>
-                ))} 
+                    {!post.post.published && <button onClick={handlePublish} className="my-2">Publish</button>}
+                    {post.post.published && <button onClick={handleUnpublish} className="my-2">Un-publish</button>}
+                    <p className='my-2 font-bold text-lg'>Comments</p>
+                    {post.post.comments.map(comment => (
+                        <div className="text-sm" key={comment._id}>
+                            <p className='text-lg italic'>{comment.content}</p>
+                            <p>{formatDate(comment.date)}</p>
+                            <p>Comment Author: {comment.author.username}</p>
+                            <p>Comment ID: {comment._id}</p>
+                            <button className='mt-2 mb-6' onClick={() => deleteComment(comment._id)}>Delete Comment</button>
+                        </div>
+                    ))} 
+                </div>
             </div>
         }
-    </>
+    </div>
   )
 }
 

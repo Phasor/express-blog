@@ -36,7 +36,7 @@ export default function Post({ isLoggedIn, setPosts, post }) {
    
 
   return (
-    <div className='my-4'>
+    <div className='my-4 border-b border-gray-200'>
         <h2 className='text-2xl my-2'>{post.title}</h2>
         <p className='my-4'>{post.content}</p>
         <p><span className='font-bold'>Posted:</span> {formatDate(post.date)}</p>
