@@ -1,12 +1,15 @@
 # Blog Consumer Web App
 
-This front end web-app is designed for consumers to read and comment on Posts created by Admins. Users can not make or edit Posts.
+This React based web application is designed for consumers to read Posts created by Admins. Users can not make or edit Posts. Users are able to comment on Admin posts if they sign up and log in.
 
-### `npm start`
+### Running the Application Locally
 
-Runs the app in the development mode on port 3006.\
+Install the dependencies:
+`npm install`
+
+Start the development server:
+`npm start`
+
+This will run the app in development mode on port 3006.\
 Open [http://localhost:3006](http://localhost:3006) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 

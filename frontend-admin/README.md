@@ -1,9 +1,16 @@
 # Blog Admin Web App
 
-This front end web-app is designed for Admins only to read conduct CRUD operations on Users and Posts. Normal Users i.e. non Admins can not make or edit Posts.
+This is a React based web app designed to interact with the Express REST API. 
+It is designed for Admins only to conduct CRUD operations on Users, Posts and Comments. 
 
-### `npm start`
+### Starting the Application Locally
 
-Runs the app in the development mode on port 3007 by default.\
+Install the dependencies:
+`npm install`
+
+Run the development server:
+`npm start`
+
+This will run the app in development mode on port 3007 by default.\
 Open [http://localhost:3007](http://localhost:3007) to view it in your browser.
 
