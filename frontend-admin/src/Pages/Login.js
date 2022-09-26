@@ -33,15 +33,15 @@ export default function Login() {
 
 
   return (
-    <div className='bg-[#1e1e2c] text-white h-screen w-full'>
+    <div className='bg-[#1e1e2c] h-screen w-full'>
         <Header/>
-        <div className='flex m-auto mt-[150px] border border-gray-800 rounded-lg p-10 '>
-            <form onSubmit={handleSubmit}>
-                <label className='p-3' htmlFor="username">Email</label>
-                <input className='p-3' type="text" name="username" id="username" />
-                <label className='p-3' htmlFor="password">Password</label>
-                <input className='p-3' type="password" name="password" id="password" />
-                <button type="submit">Login</button>
+        <div className='flex justify-center '>
+            <form onSubmit={handleSubmit} className="flex flex-col w-1/4 border border-gray-700 rounded-lg p-4 mt-[200px]">
+                <label className='p-1' htmlFor="username">Email</label>
+                <input className='p-1 m-1 border-gray-600 rounded' type="text" name="username" id="username" />
+                <label className='p-1' htmlFor="password">Password</label>
+                <input className='p-1 m-1 border-gray-600 rounded' type="password" name="password" id="password" />
+                <button type="submit" className='m-1 mt-4 bg-blue-700'>Login</button>
             </form>
         </div>
     </div>

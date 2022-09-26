@@ -18,7 +18,7 @@ function App() {
 
   return (
     <Router>
-    <div>
+    <div className="font-roboto text-[#fffff2]">
         <Routes>
             <Route exact path="/login" element={<Login/>}/>
             <Route element={<PrivateRoutes/>}>

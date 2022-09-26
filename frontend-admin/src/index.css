@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base
+{
+    button
+    {
+        @apply text-[#fffff2] py-1 px-4 border border-blue-800 rounded-lg bg-blue-700 hover:bg-blue-800 text-lg;
+    }
+}
