@@ -36,7 +36,7 @@ export default function Post({ isLoggedIn, setPosts, post }) {
 
   return (
     <div>
-         <h1>{post.title}</h1>
+          <h1>{post.title}</h1>
         <p>{post.content}</p>
         <p>Posted: {post.date}</p>
         <p>Author: {post.author.username}, {post.author._id}</p>
@@ -49,7 +49,7 @@ export default function Post({ isLoggedIn, setPosts, post }) {
             <div key={comment._id}>
                 <p>{comment.content}</p>
                 <p>{comment.date}</p>
-                <p>Comment Author: {comment.author}</p>
+                <p>Comment Author: {comment.author.username}</p>
                 <p>Comment ID: {comment._id} </p>
                 <p>------------------------</p>
             </div>
