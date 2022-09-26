@@ -1,7 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../Components/Header'
+import { useNavigate } from 'react-router-dom'
 
 export default function Login() {
+    const [errors, setErrors] = useState("")
+    const [error, setError] = useState("")
+    const [message, setMessage] = useState("")
+    const navigate = useNavigate()
+
+
     const handleSubmit = async (e) => {
         try{
             e.preventDefault()
@@ -24,10 +31,24 @@ export default function Login() {
                 localStorage.setItem('userId', jsonData.user._id)
                 localStorage.setItem('admin', jsonData.user.admin)
                 console.log(jsonData)
-                window.location = '/'
+                setTimeout(navigate('/'), 1500);
+            } 
+            if(jsonData.success === false){
+                setMessage(jsonData.message)
+                setTimeout(() => {
+                    setMessage("")
+                }, 3000);
+            }
+            else {
+                setErrors(jsonData)
+                setTimeout(() => {
+                    setErrors("")
+                }, 3000);
             }
         } catch (err) {
             console.error(err.message)
+            setError(err.message)
+            setTimeout(setError(""), 3000);
         }
     }
 
@@ -43,6 +64,16 @@ export default function Login() {
                 <input className='p-1 m-1 border-gray-600 rounded text-black' type="password" name="password" id="password" placeholder='Password'/>
                 <button type="submit" className='m-1 mt-4 bg-blue-700'>Login</button>
             </form>
+        </div>
+        <div className='flex justify-center mt-2'>
+            {error && <p className='text-red-500'>{error}</p>}
+            {message && <p className='text-red-500'>{message}</p>}
+            <ul>
+                {errors && (
+                        errors.errors.map((error, index) => {
+                        return <li className='text-red-500 italic' key={index}>{error.msg}</li>
+                    }))}
+            </ul>
         </div>
     </div>
   )
