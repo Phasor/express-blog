@@ -80,11 +80,11 @@ export default function PostDetail() {
             <Header isLoggedIn={isLoggedIn}/>
             {showPost &&
                 <div className='flex justify-center'>
-                    <div className=" p-4 pr-8 max-w-[1000px] mt-[110px]">  
+                    <div className=" p-4 pr-8 max-w-[1000px] mt-[110px] mb-20">  
                         <Link to="/" className='text-blue-500 text-lg'>{"<--"} Back</Link>
                         <h1 className='text-4xl font-bold my-8'>{post.post.title}</h1>
                         <p className='my-2'><span className='font-bold'>Post Author:</span> {post.post.author.username}</p>
-                        <p className='my-2'>{post.post.content}</p>
+                        <p className='my-2 whitespace-pre-line'>{post.post.content}</p>
                         <p className='my-2'>{formatDate(post.post.date)}</p>
                         {isLoggedIn && 
                             <form onSubmit={postComment} className="my-6">   

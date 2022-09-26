@@ -60,7 +60,7 @@ export default function CreatePost() {
                     <label htmlFor="title" className="m-1"><span className='font-bold'>Title</span></label>
                     <input className='border border-gray-200 rounded-lg w-[50%] my-2 p-1' type="text" placeholder="Title" name="title" />
                     <label htmlFor="content" className="m-1"><span className='font-bold'>Post Content</span></label>
-                    <textarea className='border border-gray-200 rounded-lg p-1' rows="10" placeholder="Post content..." name="content" />
+                    <textarea className='whitespace-pre-line border border-gray-200 rounded-lg p-1' rows="10" placeholder="Post content..." name="content" />
                     <p className='my-2 text-red-600 italic'>Posts must be staged and then published after to appear on the blog.</p>
                     <button className='my-4 bg-blue-700 border rounded-md text-white' type="submit">Stage Post</button>
                 </form>

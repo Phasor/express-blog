@@ -44,7 +44,7 @@ export default function Post({setPosts, post, isLoggedIn}) {
   return (
     <div className='border-b px-2'>
         <h1 className='text-4xl font-bold my-8'>{post.title}</h1>
-        <p className='mb-3'>{truncatePost(post.content,200)}</p>
+        <p className='mb-3 whitespace-pre-line'>{truncatePost(post.content,200)}</p>
         <Link to={`/${post._id}`} className="underline text-blue-600">Full Post</Link>
         <p className='mt-4'><span className='font-bold'>Post Author:</span> {post.author.username}</p>
         <p className='mb-4'>{formatDate(post.date)}</p>

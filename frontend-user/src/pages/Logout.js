@@ -18,6 +18,7 @@ export default function Logout() {
   return (
     <div>
         <Header/>
+        <p className="text-center p-8">Logging out...</p>
         <Toaster />
     </div>
   )
