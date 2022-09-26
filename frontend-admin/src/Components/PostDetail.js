@@ -9,6 +9,7 @@ export default function PostDetail() {
     const [statusMessage, setStatusMessage] = useState("")
     const [postContent, setPostContent] = useState("")
     const [postTitle, setPostTitle] = useState("")
+    const [isLoggedIn,setIsLoggedIn] = useState(false)
 
     useEffect(() => {
         try{
@@ -26,6 +27,12 @@ export default function PostDetail() {
             console.error(err.message)
         }
     }, [id])
+
+    useEffect(() => {
+        if (localStorage.getItem('token')) {
+            setIsLoggedIn(true)
+        }
+    }, [])
     
     const updatePost = async (e) => {
         const response = await fetch(`http://localhost:3000/post/${id}`,
@@ -140,7 +147,7 @@ export default function PostDetail() {
   
   return (
     <div className='w-full'>
-        <Header />
+        <Header isLoggedIn={isLoggedIn}/>
         {post && 
             <div className='flex justify-center'>
                 <div className='w-[50%] bg-white border rounded-lg my-10 p-6 shadow-lg'>

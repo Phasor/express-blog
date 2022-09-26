@@ -13,7 +13,7 @@ export default function Logout() {
   return (
     <div className='w-full h-screen'>
         <Header/>
-        <p>You are now being logged out...</p>
+        <p className='p-6'>You are now being logged out...</p>
     </div>
   )
 }
