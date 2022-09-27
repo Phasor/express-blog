@@ -149,5 +149,5 @@ content-type: application/json
 
 {
   "username": "a@test.com",
-  "password": "dwdweeee"
+  "password": "test"
 }

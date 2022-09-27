@@ -35,13 +35,12 @@ export default function PostDetail() {
         }
         getUsername()
         .catch(err => console.log(err));
-        console.log("use Effect ran")
         }, [])
 
         const postComment = async (e) => {
             try{
                 e.preventDefault();
-                const response = await fetch(
+                await fetch(
                     'http://localhost:3000/comment',
                     {method: 'POST',
                     headers: {
@@ -54,8 +53,7 @@ export default function PostDetail() {
                         post: id
                     })}
                 );
-                const commentJson = await response.json();
-                console.log(commentJson);
+                // const commentJson = await response.json();
                 // refresh page
                 const getPost = async () => {
                     const response = await fetch(`http://localhost:3000/post/${id}`,

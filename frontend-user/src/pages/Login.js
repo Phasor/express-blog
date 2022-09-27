@@ -80,17 +80,18 @@ export default function Login() {
                 </form>
             </div>
         </div>
-                {errors && (
-                     <div className='flex justify-center'>
-                        <ul className='text-red-500 italic text-lg font-bold mt-5'>
-                            {errors.errors.map((error, index) => {
-                                return <li key={index}>{error.msg}</li>
-                            })}
-                        </ul>
-                    </div>
-                )}
-                {message && <p className='text-red-500 italic mt-5 text-center text-lg font-bold'>{message}</p>}
-                {error && <p className='text-red-500'>{error}</p>}
+        <div className='flex justify-center'>
+            { errors.errors && (    
+                <ul className='text-red-500 italic text-lg font-bold mt-5'>
+                    {errors.errors.map((error, index) => {
+                        return <li key={index}>{error.msg}</li>
+                    })}
+                </ul>
+                )
+            }
+            {message && <p className='text-red-500 italic mt-5 text-center text-lg font-bold'>{message}</p>}
+            {error && <p className='text-red-500'>{error}</p>}
+        </div>
         <Footer />
     </div>
   )

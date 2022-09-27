@@ -22,7 +22,6 @@ export default function Home() {
     }
     getUsername()
     .catch(err => console.log(err));
-    console.log("use Effect ran")
     }, [])
 
 
