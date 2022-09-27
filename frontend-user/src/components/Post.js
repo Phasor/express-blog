@@ -9,7 +9,7 @@ export default function Post({setPosts, post, isLoggedIn}) {
     const postComment = async (e) => {
         try{
             e.preventDefault();
-            const response = await fetch(
+            await fetch(
                 'http://localhost:3000/comment',
                 {method: 'POST',
                 headers: {
@@ -23,8 +23,8 @@ export default function Post({setPosts, post, isLoggedIn}) {
                 })}
             );
 
-            const commentJson = await response.json();
-            console.log(commentJson);
+            // const commentJson = await response.json();
+            // console.log(commentJson);
             setComment('');
 
             const refreshedPosts = await fetch(
@@ -32,7 +32,7 @@ export default function Post({setPosts, post, isLoggedIn}) {
                 {method: 'GET'}
                 )
             const refreshedPostsJson = await refreshedPosts.json();
-            console.log(refreshedPostsJson);
+            // console.log(refreshedPostsJson);
             setPosts(refreshedPostsJson);
 
         } catch(err) {
