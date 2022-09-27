@@ -12,10 +12,11 @@ export default function PostDetail() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [comment, setComment] = useState("");
     const [error, setError] = useState("");
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
     useEffect(() => {
         const getPost = async () => {
-            const response = await fetch(`http://localhost:3000/post/${id}`,
+            const response = await fetch(`${API_URL}/post/${id}`,
             {
                 method: 'GET',
                 headers: {'Content-Type': 'application/json'}
@@ -25,7 +26,7 @@ export default function PostDetail() {
             setShowPost(true);
         }
         getPost();
-    },[id])
+    },[id, API_URL])
 
     useEffect(() => {    
         const getUsername = async () => {
@@ -41,7 +42,7 @@ export default function PostDetail() {
             try{
                 e.preventDefault();
                 await fetch(
-                    'http://localhost:3000/comment',
+                    `${API_URL}/comment`,
                     {method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -56,7 +57,7 @@ export default function PostDetail() {
                 // const commentJson = await response.json();
                 // refresh page
                 const getPost = async () => {
-                    const response = await fetch(`http://localhost:3000/post/${id}`,
+                    const response = await fetch(`${API_URL}/post/${id}`,
                     {
                         method: 'GET',
                         headers: {'Content-Type': 'application/json'}

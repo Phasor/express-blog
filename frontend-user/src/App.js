@@ -4,8 +4,8 @@ import {
     Routes,
     Route,
     Navigate
-  } from "react-router-dom";
-  //import components
+} from "react-router-dom";
+//import components
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Logout from './pages/Logout';

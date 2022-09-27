@@ -5,12 +5,13 @@ import truncatePost from '../utils/truncatePost';
 
 export default function Post({setPosts, post, isLoggedIn}) {
     const [comment, setComment] = useState("");
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
     const postComment = async (e) => {
         try{
             e.preventDefault();
             await fetch(
-                'http://localhost:3000/comment',
+                `${API_URL}/comment`,
                 {method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -28,7 +29,7 @@ export default function Post({setPosts, post, isLoggedIn}) {
             setComment('');
 
             const refreshedPosts = await fetch(
-                'http://localhost:3000/post',
+                `${API_URL}/post`,
                 {method: 'GET'}
                 )
             const refreshedPostsJson = await refreshedPosts.json();

@@ -11,13 +11,14 @@ export default function Login() {
     const [error, setError] = useState("");
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
     const LoginUser = async (e) => {
         e.preventDefault();
         try{
             // get the JWT
             const response = await fetch(
-                'http://localhost:3000/login',
+                `${API_URL}/login`,
                 {
                     method: 'POST',
                     headers: {

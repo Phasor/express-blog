@@ -10,11 +10,12 @@ export default function Signup() {
     const [errors, setErrors] = useState(null);
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
 const handleSubmit = async (e) => {
     try{
         e.preventDefault();        
-        const response = await fetch('http://localhost:3000/user',
+        const response = await fetch(`${API_URL}/user`,
         {method: 'POST',
         headers: {
             'Content-Type': 'application/json'

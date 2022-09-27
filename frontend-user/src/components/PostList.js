@@ -4,11 +4,12 @@ import Post from './Post';
 export default function PostList({isLoggedIn, username}) {
     const [posts, setPosts] = useState([]);
     const [isloading, setIsloading] = useState(true);
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
     
     useEffect(() => {
             const getPosts = async () => {
                 const posts = await fetch(
-                    'http://localhost:3000/post',
+                    `${API_URL}/post`,
                     {method: 'GET'}
                 );
                 const postsJson = await posts.json();
@@ -18,7 +19,7 @@ export default function PostList({isLoggedIn, username}) {
          getPosts()
         .then(updatedPosts => setPosts(updatedPosts))
         .catch(err => console.log(err));
-    }, [])
+    }, [API_URL])
 
     if (isloading) {
         return <div>Loading...</div>

@@ -4,6 +4,8 @@ This React based web application is designed for consumers to read Posts created
 
 ### Running the Application Locally
 
+Ensure the backend API has been installed and is running locally before installing and running this front end app.
+
 Install the dependencies:
 `npm install`
 
