@@ -6,6 +6,7 @@ export default function CreatePost() {
     const[success, setSuccess] = useState(false);
     const[error, setError] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -23,7 +24,7 @@ export default function CreatePost() {
         try{
             // Send post request to backend
             
-            const response = await fetch('http://localhost:3000/post', {
+            const response = await fetch(`${API_URL}/post`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -7,14 +7,14 @@ export default function Login() {
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
     const navigate = useNavigate()
-
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
     const handleSubmit = async (e) => {
         try{
             e.preventDefault()
             const username = e.target.elements.username.value
             const password = e.target.elements.password.value
-            const response = await fetch('http://localhost:3000/login', {
+            const response = await fetch(`${API_URL}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -30,7 +30,7 @@ export default function Login() {
                 localStorage.setItem('username', jsonData.user.username)
                 localStorage.setItem('userId', jsonData.user._id)
                 localStorage.setItem('admin', jsonData.user.admin)
-                console.log(jsonData)
+                // console.log(jsonData)
                 setTimeout(navigate('/'), 1500);
             } 
             if(jsonData.success === false){

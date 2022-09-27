@@ -10,23 +10,24 @@ export default function PostDetail() {
     const [postContent, setPostContent] = useState("")
     const [postTitle, setPostTitle] = useState("")
     const [isLoggedIn,setIsLoggedIn] = useState(false)
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
     useEffect(() => {
         try{
             const getPost = async () => {
-                const response = await fetch(`http://localhost:3000/post/${id}`,
+                const response = await fetch(`${API_URL}/post/${id}`,
                 {method: 'GET'})
                 const jsonData = await response.json()
                 setPost(jsonData)
                 setPostContent(jsonData.post.content)
                 setPostTitle(jsonData.post.title)
-                console.log(jsonData)
+                // console.log(jsonData)
             }
             getPost()
         } catch(err) {
             console.error(err.message)
         }
-    }, [id])
+    }, [id, API_URL])
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -35,7 +36,7 @@ export default function PostDetail() {
     }, [])
     
     const updatePost = async (e) => {
-        const response = await fetch(`http://localhost:3000/post/${id}`,
+        const response = await fetch(`${API_URL}/post/${id}`,
             {method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
@@ -49,8 +50,8 @@ export default function PostDetail() {
                 published: post.post.published
                 })
             })
-        const responseJson = await response.json()
-        console.log(`responsejson: ${responseJson}`)
+        // const responseJson = await response.json()
+        // console.log(`responsejson: ${responseJson}`)
         if(response.ok) {
             setStatusMessage("Post updated successfully")
         } else {
@@ -62,13 +63,13 @@ export default function PostDetail() {
 
     const deleteComment = async (commentID) => {
         try {
-            const response = await fetch(`http://localhost:3000/comment/${commentID}`,
+            const response = await fetch(`${API_URL}/comment/${commentID}`,
             {method: 'DELETE',
             headers: {
                 'Authorization': localStorage.getItem('token')
             }})
             const jsonData = await response.json()
-            console.log(jsonData)
+            // console.log(jsonData)
             if(jsonData.success === true) {
                 setStatusMessage("Comment deleted successfully")
             } else {
@@ -78,13 +79,13 @@ export default function PostDetail() {
             // update the post like (remove the deleted comment)
             try{
                 const getPost = async () => {
-                    const response = await fetch(`http://localhost:3000/post/${id}`,
+                    const response = await fetch(`${API_URL}/post/${id}`,
                     {method: 'GET'})
                     const jsonData = await response.json()
                     setPost(jsonData)
                     setPostContent(jsonData.post.content)
                     setPostTitle(jsonData.post.title)
-                    console.log(jsonData)
+                    // console.log(jsonData)
                 }
                 getPost()
             } catch(err) {
@@ -97,7 +98,7 @@ export default function PostDetail() {
     }
 
     const handlePublish = async (e) => {
-        const response = await fetch(`http://localhost:3000/post/${id}/publish`,
+        const response = await fetch(`${API_URL}/post/${id}/publish`,
         {method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -105,14 +106,14 @@ export default function PostDetail() {
         }
         })
         const responseJson = await response.json()
-        console.log(responseJson)
+        // console.log(responseJson)
         if(responseJson.success === true) {
             setStatusMessage("Post updated successfully")
         } else {
             setStatusMessage("Post update failed")
         }
         // reload the page
-        const updatedPost = await fetch(`http://localhost:3000/post/${id}`,
+        const updatedPost = await fetch(`${API_URL}/post/${id}`,
         {method: 'GET'})
         const updatedPostJson = await updatedPost.json()
         setPost(updatedPostJson)
@@ -121,7 +122,7 @@ export default function PostDetail() {
     }
 
     const handleUnpublish = async (e) => {
-        const response = await fetch(`http://localhost:3000/post/${id}/unpublish`,
+        const response = await fetch(`${API_URL}/post/${id}/unpublish`,
         {method: 'PUT',
         headers: {
             'Content-Type': 'application/json',
@@ -129,14 +130,14 @@ export default function PostDetail() {
         }
         })
         const responseJson = await response.json()
-        console.log(responseJson)
+        // console.log(responseJson)
         if(responseJson.success === true) {
             setStatusMessage("Post updated successfully")
         } else {
             setStatusMessage("Post update failed")
         }
         // reload the page
-        const updatedPpst = await fetch(`http://localhost:3000/post/${id}`,
+        const updatedPpst = await fetch(`${API_URL}/post/${id}`,
         {method: 'GET'})
         const updatedPostJson = await updatedPpst.json()
         setPost(updatedPostJson)

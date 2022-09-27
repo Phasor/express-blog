@@ -8,6 +8,7 @@ export default function UserDetail() {
     const [showUser, setShowUser] = useState(false)
     const [error, setError] = useState('')
     const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
     const userID = useParams().id
 
@@ -15,25 +16,25 @@ export default function UserDetail() {
         try{
             // get user details
             const getUser = async () => {
-                const response = await fetch(`http://localhost:3000/user/${userID}`,
+                const response = await fetch(`${API_URL}/user/${userID}`,
                 {method: 'GET',
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }})
                 const jsonData = await response.json()
-                console.log(jsonData)
+                // console.log(jsonData)
                 setUser(jsonData)
             }
             // get all users comments
             const getComments = async () => {
     
-                const response = await fetch(`http://localhost:3000/comment/${userID}`,
+                const response = await fetch(`${API_URL}/comment/${userID}`,
                 {method: 'GET',
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }})
                 const jsonData = await response.json()
-                console.log(jsonData)
+                // console.log(jsonData)
                 setComments(jsonData)
                 setShowUser(true)
             }
@@ -44,7 +45,7 @@ export default function UserDetail() {
             setShowUser(false)
             setError("Failed to fetch user.")
         }
-    }, [userID])
+    }, [userID, API_URL])
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
@@ -54,22 +55,22 @@ export default function UserDetail() {
 
     const deleteComment = async (commentId) => {
         try{
-            await fetch(`http://localhost:3000/comment/${commentId}`,
+            await fetch(`${API_URL}/comment/${commentId}`,
             {method: 'DELETE',
             headers: {
                 'Authorization': localStorage.getItem('token')
             }})
-            console.log("Deleted comment")
+            // console.log("Deleted comment")
             // refresh comments
             const getComments = async () => {
     
-                const response = await fetch(`http://localhost:3000/comment/${userID}`,
+                const response = await fetch(`${API_URL}/comment/${userID}`,
                 {method: 'GET',
                 headers: {
                     'Authorization': localStorage.getItem('token')
                 }})
                 const jsonData = await response.json()
-                console.log(jsonData)
+                // console.log(jsonData)
                 setComments(jsonData)
                 setShowUser(true)
             }
@@ -81,12 +82,12 @@ export default function UserDetail() {
 
     const deleteUser = async () => {
         try{
-            await fetch(`http://localhost:3000/user/${userID}`,
+            await fetch(`${API_URL}/user/${userID}`,
             {method: 'DELETE',
             headers: {
                 'Authorization': localStorage.getItem('token')
             }})
-            console.log("Deleted user")
+            // console.log("Deleted user")
             window.location = "/"
         } catch(err) {
             console.error(err.message)

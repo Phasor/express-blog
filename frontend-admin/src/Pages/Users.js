@@ -7,33 +7,33 @@ export default function Users() {
     const [status, setStatus] = useState("")
     const [showUsers, setShowUsers] = useState(false)
     const [isLoggedIn,setIsLoggedIn] = useState(false)
-
-    const getUsers = async () => {
-        try{
-            const response = await fetch('http://localhost:3000/user',
-            {method: 'GET',
-            headers: {
-                'Authorization': localStorage.getItem('token')
-            }})
-            if(response.ok) {
-                const jsonData = await response.json()
-                console.log(jsonData)
-                setUsers(jsonData)
-                setStatus("Users fetched successfully")
-                setShowUsers(true)
-            } else {
-                console.log("Response error")
-                setStatus("Failed to fetch users")
-            }
-        } catch (err) {
-            console.error(err.message)
-            setStatus("Failed to fetch users")
-        }
-    }
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
     useEffect(() => {
+        const getUsers = async () => {
+            try{
+                const response = await fetch(`${API_URL}/user`,
+                {method: 'GET',
+                headers: {
+                    'Authorization': localStorage.getItem('token')
+                }})
+                if(response.ok) {
+                    const jsonData = await response.json()
+                    // console.log(jsonData)
+                    setUsers(jsonData)
+                    setShowUsers(true)
+                } else {
+                    console.log("Response error")
+                    setStatus("Failed to fetch users")
+                }
+            } catch (err) {
+                console.error(err.message)
+                setStatus("Failed to fetch users")
+            }
+        }
         getUsers()
-    }, [])
+    },[API_URL])
+    
 
     useEffect(()=> {
         if(localStorage.getItem('token')) {

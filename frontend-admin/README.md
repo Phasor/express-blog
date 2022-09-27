@@ -5,6 +5,8 @@ It is designed for Admins only to conduct CRUD operations on Users, Posts and Co
 
 ### Starting the Application Locally
 
+Ensure you have downloaded, installed and are running the backend API before attempting to run this front end.
+
 Install the dependencies:
 `npm install`
 

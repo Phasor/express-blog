@@ -4,12 +4,12 @@ import formatDate from '../utils/formatDate'
 
 export default function Post({ isLoggedIn, setPosts, post }) {
     const[error, setError] = useState(null)
-    
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
     const deletePost = async (id) => {
         try {       
                 // send a DELETE request to the backend
-                const response = await fetch(`http://localhost:3000/post/${post._id}`, 
+                const response = await fetch(`${API_URL}/post/${post._id}`, 
                 {method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -17,13 +17,13 @@ export default function Post({ isLoggedIn, setPosts, post }) {
                 }
                 })
                 const responseJson = await response.json()
-                console.log(responseJson)
+                // console.log(responseJson)
                 if(response.ok === false) {
                     setError(responseJson.message)
                 }
                 // fetch and set updated posts from the backend
                 if(response.ok === true) {
-                    const updatedPosts = await fetch('http://localhost:3000/post',
+                    const updatedPosts = await fetch(`${API_URL}/post`,
                     {method: 'GET'})
                     const jsonData = await updatedPosts.json()
                     setPosts(jsonData)

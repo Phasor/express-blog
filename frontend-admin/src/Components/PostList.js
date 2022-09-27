@@ -3,11 +3,12 @@ import Post from './Post'
 
 export default function PostList({ isLoggedIn }) {
     const [posts, setPosts] = useState([])
+    const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
     useEffect(() => {
         try{
             const getPosts = async () => {
-                const response = await fetch('http://localhost:3000/post/all',
+                const response = await fetch(`${API_URL}/post/all`,
                 {method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,7 +21,7 @@ export default function PostList({ isLoggedIn }) {
         } catch(err) {
             console.error(err.message)
         }
-    }, [])
+    }, [API_URL])
 
 
   return (
