@@ -10,6 +10,6 @@ Install the dependencies:
 Start the development server:
 `npm start`
 
-This will run the app in development mode on port 3006.\
-Open [http://localhost:3006](http://localhost:3006) to view it in your browser.
+This will run the app in development mode on port 5000.\
+Open [http://localhost:5000](http://localhost:5000) to view it in your browser.
 

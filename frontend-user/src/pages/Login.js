@@ -7,8 +7,9 @@ import Footer from '../components/Footer'
 export default function Login() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [errors, setErrors] = useState(null);
-    const [message, setMessage] = useState(null);
+    const [errors, setErrors] = useState("");
+    const [error, setError] = useState("");
+    const [message, setMessage] = useState("");
     const navigate = useNavigate();
 
     const LoginUser = async (e) => {
@@ -41,13 +42,24 @@ export default function Login() {
                     navigate('/')
                 }, 1000);
                 toast.success('Login successful');
-            } else {
-                if(userJson.errors) setErrors(userJson.errors.msg);
-                if (userJson.message) setMessage(userJson.message);
+            } 
+            if(userJson.success === false){
+                setMessage(userJson.message)
+                setTimeout(() => {
+                    setMessage("")
+                }, 3000);
+            }
+            else {
+                setErrors(userJson)
+                setTimeout(() => {
+                    setErrors("")
+                }, 3000);
             }
 
         } catch(err) {
-            console.log(err);
+            console.error(err.message)
+            setError(err.message)
+            setTimeout(setError(""), 3000);
         }
     }
 
@@ -71,13 +83,14 @@ export default function Login() {
                 {errors && (
                      <div className='flex justify-center'>
                         <ul className='text-red-500 italic text-lg font-bold mt-5'>
-                            {errors.map((error, index) => {
+                            {errors.errors.map((error, index) => {
                                 return <li key={index}>{error.msg}</li>
                             })}
                         </ul>
                     </div>
                 )}
                 {message && <p className='text-red-500 italic mt-5 text-center text-lg font-bold'>{message}</p>}
+                {error && <p className='text-red-500'>{error}</p>}
         <Footer />
     </div>
   )
