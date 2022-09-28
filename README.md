@@ -5,6 +5,13 @@ This project consists of three key components:
 2. A consumer React based web application where users are able to read posts made by Admins and comment on posts if they log in
 3. An Admin dashboard, where Admins can perform CRUD operations on the database (create, read, update and delete posts, users and comments)
 
+## Deployed Apps
+[Consumer App](https://musical-cobbler-ca7f3c.netlify.app/)
+[Admin Panel](https://famous-biscochitos-b827bd.netlify.app/)
+
+## Video Demo
+https://www.youtube.com/watch?v=zaGwJAhp7S0
+
 ## Screenshots
 
 ![Alt text](./screenshots/ConsumerAppHome.JPG?raw=true "Consumer App Home")
