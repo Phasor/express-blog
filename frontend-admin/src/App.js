@@ -30,7 +30,7 @@ function App() {
                 <Route path="/post/:id" element={<PostDetail/>}/>
             </Route>
             {/* No match route */}
-            <Route path="*" element={<Navigate to="/home"/>}/>
+            <Route path="*" element={<Navigate to="/"/>}/>
         </Routes>
     </div>
     </Router>
