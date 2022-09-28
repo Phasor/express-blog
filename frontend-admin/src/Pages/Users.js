@@ -9,6 +9,12 @@ export default function Users() {
     const [isLoggedIn,setIsLoggedIn] = useState(false)
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
 
+    const title = "Code.Blog - Users";
+
+    useEffect(() => {
+      document.title = title;
+    }, [title]);
+
     useEffect(() => {
         const getUsers = async () => {
             try{

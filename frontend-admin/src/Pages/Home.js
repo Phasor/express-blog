@@ -6,6 +6,12 @@ export default function Home() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
 
+    const title = "Code.Blog - Home";
+
+    useEffect(() => {
+      document.title = title;
+    }, [title]);
+
     useEffect(() => {
         if (localStorage.getItem('token')) {
             setIsLoggedIn(true)

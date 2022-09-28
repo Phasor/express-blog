@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../Components/Header'
 import { useNavigate } from 'react-router-dom'
 
@@ -8,6 +8,13 @@ export default function Login({props}) {
     const [message, setMessage] = useState("")
     const navigate = useNavigate()
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
+
+    const title = "Code.Blog - Login";
+
+    useEffect(() => {
+      // This will run when the page first loads and whenever the title changes
+      document.title = title;
+    }, [title]);
 
     const handleSubmit = async (e) => {
         try{
