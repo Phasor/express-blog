@@ -6,8 +6,8 @@ This project consists of three key components:
 3. An Admin dashboard, where Admins can perform CRUD operations on the database (create, read, update and delete posts, users and comments)
 
 ## Deployed Apps
-[Consumer App](https://musical-cobbler-ca7f3c.netlify.app/)
-[Admin Panel](https://famous-biscochitos-b827bd.netlify.app/)
+1. [Consumer App](https://musical-cobbler-ca7f3c.netlify.app/){:target="_blank"}
+2. [Admin Panel](https://famous-biscochitos-b827bd.netlify.app/){:target="_blank"}
 
 ## Video Demo
 https://www.youtube.com/watch?v=zaGwJAhp7S0
