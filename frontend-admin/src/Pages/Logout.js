@@ -9,7 +9,7 @@ export default function Logout() {
         localStorage.removeItem('token')
         localStorage.removeItem('username')
         localStorage.removeItem('userId')
-        setTimeout(navigate('/login'), 2000);
+        setTimeout(navigate('/'), 2000);
     }, [navigate])
 
   return (

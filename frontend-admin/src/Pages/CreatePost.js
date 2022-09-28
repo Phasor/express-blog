@@ -55,7 +55,7 @@ export default function CreatePost() {
         <Header isLoggedIn={isLoggedIn}/>
         <div className='flex justify-center'>   
             <div className='w-[50%] bg-white border rounded-lg my-10 p-6 shadow-lg'>
-                <Link to='/' className=' text-blue-500 hover:text-blue-700'>{"<--"}Back</Link>
+                <Link to='/home' className=' text-blue-500 hover:text-blue-700'>{"<--"}Back</Link>
                 <h2 className='text-2xl mb-3' >Create Post</h2>
                 <form onSubmit={handleSubmit} className="border border-gray-200 rounded-lg p-2 flex flex-col">
                     <label htmlFor="title" className="m-1"><span className='font-bold'>Title</span></label>

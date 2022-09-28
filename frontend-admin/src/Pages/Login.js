@@ -31,7 +31,7 @@ export default function Login({props}) {
                 localStorage.setItem('userId', jsonData.user._id)
                 localStorage.setItem('admin', jsonData.user.admin)
                 // console.log(jsonData)
-                setTimeout(navigate('/'), 1500);
+                setTimeout(navigate('/home'), 1500);
             } 
             if(jsonData.success === false){
                 setMessage(jsonData.message)

@@ -47,8 +47,8 @@ export default function Users() {
             <Header isLoggedIn={isLoggedIn}/>
             <div className='flex justify-center'>
                 <div className='w-[50%] bg-white border rounded-lg my-10 p-6'>
-                    <Link to="/"><h2 className='text-2xl'>User List</h2></Link>
-                    <p className='my-4'><Link to="/" className=' text-blue-500'>{"<-- "}Back</Link></p>
+                    <Link to="/home"><h2 className='text-2xl'>User List</h2></Link>
+                    <p className='my-4'><Link to="/home" className=' text-blue-500'>{"<-- "}Back</Link></p>
                     <p>{status}</p>
                     {showUsers && users.users.map(user => (
                         <div className="border-b my-6" key={user._id}>

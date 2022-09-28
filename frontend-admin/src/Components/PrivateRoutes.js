@@ -29,11 +29,11 @@ export default function PrivateRoutes() {
     if(isChecking) return (
         <div>
             <Header/>
-            <p className='w-full h-screen p-8 text-center'>Trying to log you in...</p>
+            <p className='w-full h-screen p-8 text-center'>Trying to log you in. Please wait...</p>
         </div>
     )
 
-    return isLoggedIn ? <Outlet /> : <Navigate to={'/login'} />
+    return isLoggedIn ? <Outlet /> : <Navigate to={'/'} />
 }
 
 

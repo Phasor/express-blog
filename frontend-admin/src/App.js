@@ -20,17 +20,17 @@ function App() {
     <Router>
     <div className="font-roboto text-gray-800 bg-[#E5E7EB]">
         <Routes>
+            <Route index element={<Login/>}/>
             <Route element={<PrivateRoutes/>}>
+                <Route exact path="/home" element={<Home/>}/>
                 <Route exact path="/logout" element={<Logout/>}/>
                 <Route path="/users/:id" element={<UserDetail/>}/>
                 <Route exact path="/users" element={<Users/>}/>
                 <Route exact path="/create-post" element={<CreatePost/>}/>
                 <Route path="/post/:id" element={<PostDetail/>}/>
-                <Route index element={<Home/>}/>
             </Route>
-            <Route exact path="/login" element={<Login/>}/>
             {/* No match route */}
-            <Route path="*" element={<Navigate to="/login"/>}/>
+            <Route path="*" element={<Navigate to="/home"/>}/>
         </Routes>
     </div>
     </Router>

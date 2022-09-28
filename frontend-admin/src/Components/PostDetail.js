@@ -153,7 +153,7 @@ export default function PostDetail() {
         {post && 
             <div className='flex justify-center'>
                 <div className='w-[50%] bg-white border rounded-lg my-10 p-6 shadow-lg'>
-                    <Link to="/" className='text-blue-500 underline'>{"<--"} Back</Link>
+                    <Link to="/home" className='text-blue-500 underline'>{"<--"} Back</Link>
                     <Link to='/'><h2 className='text-2xl my-2'>Edit Post</h2></Link>
                     <p><span className='font-bold'>Post ID: </span>{post.post._id}</p>
                     <form onSubmit={updatePost} className="flex flex-col my-2">
