@@ -36,6 +36,7 @@ export default function PostDetail() {
     }, [])
     
     const updatePost = async (e) => {
+        e.preventDefault()
         const response = await fetch(`${API_URL}/post/${id}`,
             {method: 'PUT',
             headers: {

@@ -5,7 +5,6 @@ import PostList from '../Components/PostList'
 export default function Home() {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
-    console.log("in Home")
 
     useEffect(() => {
         if (localStorage.getItem('token')) {
