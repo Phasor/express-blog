@@ -7,6 +7,12 @@ import toast, { Toaster } from 'react-hot-toast';
 export default function Logout() {
     const navigate = useNavigate();
 
+    const title = "Code.Blog - Log Out";
+
+    useEffect(() => {
+      document.title = title;
+    }, [title]);
+
     useEffect(() => {
         setTimeout(() => {localStorage.removeItem('token');}, 1000);
         setTimeout(() => {localStorage.removeItem('username');}, 1000);

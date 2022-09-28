@@ -14,6 +14,12 @@ export default function PostDetail() {
     const [error, setError] = useState("");
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
 
+    const title = "Code.Blog - Post Detail";
+
+    useEffect(() => {
+      document.title = title;
+    }, [title]);
+
     useEffect(() => {
         const getPost = async () => {
             const response = await fetch(`${API_URL}/post/${id}`,

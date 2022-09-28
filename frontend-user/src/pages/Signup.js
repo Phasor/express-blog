@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Header from '../components/Header'
 import Footer from '../components/Footer'
 import toast, { Toaster } from 'react-hot-toast';
@@ -11,6 +11,12 @@ export default function Signup() {
     const [message, setMessage] = useState(null);
     const navigate = useNavigate();
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
+    const title = "Code.Blog - Sign Up";
+
+    useEffect(() => {
+      document.title = title;
+    }, [title]);
 
 const handleSubmit = async (e) => {
     try{

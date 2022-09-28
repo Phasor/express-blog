@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import {useNavigate} from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 import Header from '../components/Header'
@@ -12,6 +12,12 @@ export default function Login() {
     const [message, setMessage] = useState("");
     const navigate = useNavigate();
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000';
+
+    const title = "Code.Blog - Log In";
+
+    useEffect(() => {
+      document.title = title;
+    }, [title]);
 
     const LoginUser = async (e) => {
         e.preventDefault();

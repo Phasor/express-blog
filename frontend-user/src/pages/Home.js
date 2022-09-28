@@ -9,6 +9,12 @@ export default function Home() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [refresh, setRefresh] = useState(false);
 
+  const title = "Code.Blog - Home";
+
+  useEffect(() => {
+    document.title = title;
+  }, [title]);
+
     const refreshHome = () => {
         setRefresh(!refresh);
     }
