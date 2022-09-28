@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../Components/Header';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 export default function CreatePost() {
     const[success, setSuccess] = useState(false);
     const[error, setError] = useState(null);
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const API_URL = process.env.REACT_APP_API_URL || 'http://localhost:3000'
+    const navigate = useNavigate();
 
     const title = "Code.Blog - Create Post";
 
@@ -47,7 +48,7 @@ export default function CreatePost() {
             console.log(jsonReponse);
             if(jsonReponse.successful){
                 setSuccess(true);
-                setTimeout(() => { window.location = '/'; }, 2000);
+                setTimeout(() => navigate('/home'), 2000);
             } else {
                 setError(jsonReponse.message);
             }
