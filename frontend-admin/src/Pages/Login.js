@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Header from '../Components/Header'
 import { useNavigate } from 'react-router-dom'
 
-export default function Login() {
+export default function Login({props}) {
     const [errors, setErrors] = useState("")
     const [error, setError] = useState("")
     const [message, setMessage] = useState("")
