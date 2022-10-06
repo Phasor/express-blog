@@ -16,20 +16,23 @@ async function connectToDB(){
 }
 
 // create a new user
+
 const createUser = async () => {
-    const userPassword = 'password';
+    const userPassword = 'test';
     const saltHash = utils.genPassword(userPassword);
     const salt = saltHash.salt;
     const hash = saltHash.hash;
     
-    const testUser = new User({
-        username: 'testuser',
+    const userPayload = 
+    {
+        username: 'a@test.com',
         hash: hash,
         salt: salt,
         admin: true
-    });
+    }
+    // const testUser = new User(userPayload);
     
-    await User.create(testUser, (err, user) => {
+    await User.create(userPayload, (err, user) => {
         if (err) {
             console.log(err);
         }
@@ -38,27 +41,31 @@ const createUser = async () => {
     });
 }
 
-const createPosts = async () => {
-    const authorID = new mongoose.Types.ObjectId();
-    const testPosts = [
-        {
-            title: 'test post1',
-            content: 'test content',
-            author: authorID,
-            date: Date.now(),
-            published: true,
-            comments: []
-        },
-        {
-            title: 'test post2',
-            content: 'test content',
-            author: authorID,
-            date: Date.now(),
-            published: true,
-            comments: []
-        }
-    ];
-    await Post.create(testPosts, (err, posts) => {
+const user = createUser();
+
+
+// create some dummy posts 
+const postPayload = [
+    {
+        title: 'test post1',
+        content: 'test content',
+        author: new mongoose.Types.ObjectId(),
+        date: Date.now(),
+        published: true,
+        comments: []
+    },
+    {
+        title: 'test post2',
+        content: 'test content',
+        author: new mongoose.Types.ObjectId(),
+        date: Date.now(),
+        published: true,
+        comments: []
+    }
+];
+
+const createPosts = async (posts) => {
+    await Post.create(posts, (err, posts) => {
         if (err) {
             console.log(err);
         }
@@ -66,16 +73,14 @@ const createPosts = async () => {
     });
 }
 
-const user = createUser();
-createPosts();
-const tokenObject = utils.issueJWT(user);
-const token = tokenObject.token;
-// console.log(`token: ${token}`);
+// use to save JWT token below
+var token = '';
 
 // clear database
 beforeAll(async() => {
     await User.deleteMany()
     await Post.deleteMany()
+    await createPosts(postPayload);
 })
 afterAll(() => {
     mongoose.connection.close()
@@ -95,17 +100,23 @@ describe("/post", () => {
         })
     })
     
-    describe("given a GET to /post/all", () => {
+    describe("given correct login credentials, try and login", () => {
         it("should return a 200 status code", async () => {
             const response = await request(app)
-            .get('/post/all')
-            .set('Content-Type','application/json')
-            .set('Authorization', token)
-            expect(response.statusCode).toBe(200)
+                .post('/login')
+                .set('Content-Type','application/json')
+                .send({
+                    username: 'a@test.com',
+                    password: 'test'
+                })
+                .expect(200)
+                .then(response => {
+                    token = response.body.token;
+                })
         })
     })
 
-    describe("given a valid request to post a new post", () => {
+    describe("given user is logged in, posting a post", () => {
         it("should return a 200 status code", async () => {
             const response = await request(app)
             .post('/post')
@@ -114,11 +125,13 @@ describe("/post", () => {
             .send({
                 title: 'test post3',
                 content: 'test content',
-                author: authorID
+                author: new mongoose.Types.ObjectId()
             })
             expect(response.statusCode).toBe(200)
+            console.log(response.body);
             expect(response.body.post.title).toBe('test post3')
             expect(response.body.post.content).toBe('test content')
         })
     })
+
 })
